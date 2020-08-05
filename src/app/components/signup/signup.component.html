@@ -1,0 +1,171 @@
+<div class="signup-container">
+    
+    <div class="paralax-background home">
+        <img src="../../../assets/images/sport-running-correporcucuta.com.png">
+    </div>
+
+    <div style="opacity:0;position: fixed;">
+        <ul>
+            <li>Carreara 2020</li>
+            <li>Corre Por Cucuta</li>
+            <li>Corre 21K</li>
+            <li>Corre 10K</li>
+            <li>Corre 5K</li>
+            <li>Podio y Premios</li>
+            <li>Reglamento de la Carrera</li>
+            <li>Corre Por Cucuta - Patrocinadores</li>
+            <li>Corre Por Cucuta - Aliados</li>
+        </ul>
+    </div>
+
+    <div class="home-container signup" *ngIf="navigatedRoute === 0">
+        <div  >
+            <h2 class="upper-subtitle">JUNIO 28 - 2020</h2>
+            <h1 class="main-title">
+                MEDIA MARATÓN CÚCUTA
+            </h1>
+            <h2 class="lighter-subtitle">COLOMBIA</h2>
+            <!-- <h1 class="secondary-title">
+                INSCRIPCIONES ABIERTAS A PARTIR DEL 10 DE MARZO
+            </h1> -->
+        </div >
+        <div class="casi-listos"  *ngIf="navigatedRoute === 0">
+            <h2 style="color: white;">
+                La carrera CORRE POR CÚCUTA, es un evento deportivo que tiene como propósitos destacar los aspectos formativos y educativos que tiene el deporte en todas las esferas, y promover la importancia de la deportividad como concepto que implica el comportamiento respetuoso de los deportistas frente a las reglas, al rival, y a los espectadores y a los jueces, dentro y fuera de la carrera.
+            </h2>
+        </div>
+
+        <div class="categories-container" *ngIf="navigatedRoute === 0">
+            <h1>CATEGORIAS</h1>
+            <div class="container">
+                <div class="one-third">
+                    <h1>21K</h1>
+                    <div class="info">
+                        <svg class="Rectangle_79_cj">
+                            <linearGradient id="Rectangle_79_cj" spreadMethod="pad" x1="1" x2="0" y1="0.5" y2="0.5">
+                                <stop offset="0" stop-color="#ff0051" stop-opacity="1"></stop>
+                                <stop offset="1" stop-color="#029ff2" stop-opacity="1"></stop>
+                            </linearGradient>
+                            <rect fill="url(#Rectangle_79_cj)" id="Rectangle_79_cj" rx="0" ry="0" x="0" y="0" width="400" height="5">
+                            </rect>
+                        </svg>
+                        <h2>La carrera de veintiún kilómetros será la de mayor extensión, recorrerá la ciudad de la siguiente manera.</h2>
+                        <h2 class="price-header  heartbeat 1">PRECIO DE INSCRIPCION <br> <span >ETAPA TEMPRANA!</span></h2>
+                        <h2 class="price-tag">$80.000 COP</h2>
+                        <h2 class="price-header">PREMIOS</h2>
+                        <h2 class="price-header">SOLO <span style="font-size: 1.4rem;font-weight: 800;">1.000 CUPOS</span></h2>
+                        <!-- <h2 class="price-tag"><span>1o</span> 3.000.000 COP</h2>
+                        <h2 class="price-tag"><span>2o</span> 3.000.000 COP</h2>
+                        <h2 class="price-tag"><span>3o</span> 3.000.000 COP</h2> -->
+                        <svg class="Rectangle_79_cj 2">
+                            <linearGradient id="Rectangle_79_cj" spreadMethod="pad" x1="1" x2="0" y1="0.5" y2="0.5">
+                                <stop offset="0" stop-color="#ff0051" stop-opacity="1"></stop>
+                                <stop offset="1" stop-color="#029ff2" stop-opacity="1"></stop>
+                            </linearGradient>
+                            <rect fill="url(#Rectangle_79_cj)" id="Rectangle_79_cj" rx="0" ry="0" x="0" y="0" width="400" height="5">
+                            </rect>
+                        </svg>
+                        <div (click)="navigate('acerca-de-la-carrera/21-kilometros')" class="button">
+                            <div class="inner-button">
+                                <h1>
+                                    Mas Informacion
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="one-third">
+                    <h1>10K</h1>
+                    <div class="info">
+                        <svg class="Rectangle_79_cj">
+                            <linearGradient id="Rectangle_79_cj" spreadMethod="pad" x1="1" x2="0" y1="0.5" y2="0.5">
+                                <stop offset="0" stop-color="#ff0051" stop-opacity="1"></stop>
+                                <stop offset="1" stop-color="#029ff2" stop-opacity="1"></stop>
+                            </linearGradient>
+                            <rect fill="url(#Rectangle_79_cj)" id="Rectangle_79_cj" rx="0" ry="0" x="0" y="0" width="400" height="5">
+                            </rect>
+                        </svg>
+                        <h2>La carrera de diez kilómetros será la de extensión intermedia, recorrerá la ciudad de la siguiente manera.</h2>
+                        <h2 class="price-header heartbeat 2">PRECIO DE INSCRIPCION <br> <span >ETAPA TEMPRANA!</span></h2>
+                        <h2 class="price-tag">$70.000 COP</h2>
+                        <h2 class="price-header">PREMIOS</h2>
+                        <h2 class="price-header">SOLO <span style="font-size: 1.4rem;font-weight: 800;">1.000 CUPOS</span></h2>
+                        <!-- <h2 class="price-tag"><span>1o</span> 3.000.000 COP</h2>
+                        <h2 class="price-tag"><span>2o</span> 3.000.000 COP</h2>
+                        <h2 class="price-tag"><span>3o</span> 3.000.000 COP</h2> -->
+                        <svg class="Rectangle_79_cj 2">
+                            <linearGradient id="Rectangle_79_cj" spreadMethod="pad" x1="1" x2="0" y1="0.5" y2="0.5">
+                                <stop offset="0" stop-color="#ff0051" stop-opacity="1"></stop>
+                                <stop offset="1" stop-color="#029ff2" stop-opacity="1"></stop>
+                            </linearGradient>
+                            <rect fill="url(#Rectangle_79_cj)" id="Rectangle_79_cj" rx="0" ry="0" x="0" y="0" width="400" height="5">
+                            </rect>
+                        </svg>
+                        <div (click)="navigate('acerca-de-la-carrera/10-kilometros')" class="button">
+                            <div class="inner-button">
+                                <h1>
+                                    Mas Informacion
+                                </h1>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    
+                </div>
+                <div class="one-third">
+                    <h1>5K</h1>
+                    <div class="info">
+                        <svg class="Rectangle_79_cj">
+                            <linearGradient id="Rectangle_79_cj" spreadMethod="pad" x1="1" x2="0" y1="0.5" y2="0.5">
+                                <stop offset="0" stop-color="#ff0051" stop-opacity="1"></stop>
+                                <stop offset="1" stop-color="#029ff2" stop-opacity="1"></stop>
+                            </linearGradient>
+                            <rect fill="url(#Rectangle_79_cj)" id="Rectangle_79_cj" rx="0" ry="0" x="0" y="0" width="400" height="5">
+                            </rect>
+                        </svg>
+                        <h2>La carrera de cinco kilómetros será la de menor extensión, recorrerá la ciudad de la siguiente manera.</h2>
+                        <h2 class="price-header heartbeat 3">PRECIO DE INSCRIPCION <br> <span >ETAPA TEMPRANA!</span></h2>
+                        <h2 class="price-tag">$60.000 COP</h2>
+                        <h2 class="price-header">PREMIOS</h2>
+                        <h2 class="price-header">SOLO <span style="font-size: 1.4rem;font-weight: 800;">500 CUPOS</span></h2>
+                        <!-- <h2 class="price-tag"><span>1o</span> 3.000.000 COP</h2>
+                        <h2 class="price-tag"><span>2o</span> 3.000.000 COP</h2>
+                        <h2 class="price-tag"><span>3o</span> 3.000.000 COP</h2> -->
+                        <svg class="Rectangle_79_cj 2">
+                            <linearGradient id="Rectangle_79_cj" spreadMethod="pad" x1="1" x2="0" y1="0.5" y2="0.5">
+                                <stop offset="0" stop-color="#ff0051" stop-opacity="1"></stop>
+                                <stop offset="1" stop-color="#029ff2" stop-opacity="1"></stop>
+                            </linearGradient>
+                            <rect fill="url(#Rectangle_79_cj)" id="Rectangle_79_cj" rx="0" ry="0" x="0" y="0" width="400" height="5">
+                            </rect>
+                        </svg>
+                        <div (click)="navigate('acerca-de-la-carrera/5-kilometros')" class="button">
+                            <div class="inner-button">
+                                <h1>
+                                    Mas Informacion
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="home-container signup" style="padding-left: 0;" *ngIf="navigatedRoute !== 0">
+        <section style="position: relative;margin-top: 15vh!important;" *ngIf="navigatedRoute !== 0">
+            <router-outlet></router-outlet>
+           
+        </section>
+        
+    </div>
+    
+
+
+
+    <div class="footer">
+
+    </div>
+    
+</div>

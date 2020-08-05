@@ -1,0 +1,92 @@
+.find-me{
+    & > *{
+        text-align: center;
+    }
+    width: 90%!important;
+    display: block;
+    margin: 0 auto;
+    & > label{
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+    & > input{
+        background-color: rgb(255, 255, 255);
+        border-radius: 0 0 10px 10px;
+        width: 300px;
+        display: block;
+        text-align: center;
+        padding: 1rem;
+        border: none;
+        color: rgb(63, 63, 63);
+        margin: 2rem auto;
+        font-size: 1.2rem;
+        &::placeholder{
+            color: rgb(66, 66, 66);
+            font-weight: 400;
+        }
+    }
+    & > div{
+        text-align: center;
+        color: white;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        width: min-content;
+        margin: 0 auto;
+        background-color: transparent;
+        border: 1px solid #FF5B8F;
+        &:hover{
+            transform: scale(0.95);
+        }
+    }
+    & > .fourth{
+        height: 20vh!important;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .find-me{
+        & > *{
+            text-align: center;
+        }
+        width: 90%!important;
+        display: block;
+        margin: 0 auto;
+        & > label{
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+        & > input{
+            background-color: white;
+            border-radius: 0 0 10px 10px;
+            width: 85%;
+            display: block;
+            text-align: center;
+            padding: 1rem;
+            border: none;
+            color: rgb(66, 66, 66);
+            margin: 2rem auto;
+            font-size: 1.2rem;
+            &::placeholder{
+                color: rgb(66, 66, 66);
+                font-weight: 400;
+            }
+        }
+        & > div{
+            text-align: center;
+            color: white;
+            padding: 0.5rem 0;
+            cursor: pointer;
+            background-color: transparent;
+            border: 3px solid white;
+            &:hover{
+                transform: scale(0.95);
+            }
+        }
+        & > .fourth{
+            height: 20vh!important;
+        }
+    }
+    
+}

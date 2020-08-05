@@ -1,0 +1,101 @@
+#Path_1_k {
+    opacity: 0.28;
+}
+.Path_1_k {
+    overflow: visible;
+    position: absolute;
+    width: 1517.174px;
+    height: 1578.522px;
+    transform: matrix(1,0,0,1,-412.6049,351.7577) rotate(-5deg);
+    transform-origin: center;
+    left: -80px;
+    top: -80px;
+}
+
+#Path_2_n {
+    opacity: 0.43;
+}
+.Path_2_n {
+    overflow: visible;
+    position: absolute;
+    width: 2217.441px;
+    height: 2436.777px;
+    transform: matrix(1,0,0,1,-455.7782,-135.6226) rotate(217deg);
+    transform-origin: center;
+    left: 0px;
+    top: -50px;
+}
+
+@media screen and (max-width: 500px){
+    #Path_1_k {
+        opacity: 0.28;
+    }
+    .Path_1_k {
+        overflow: visible;
+		position: absolute;
+		width: 963.413px;
+		height: 997.512px;
+		transform: matrix(1,0,0,1,-600.2012,209.0295) rotate(7deg);
+		transform-origin: center;
+		left: 0px;
+		top: 5vh;
+    }
+    
+    #Path_2_n {
+        opacity: 0.43;
+    }
+    .Path_2_n {
+        overflow: visible;
+		position: absolute;
+		width: 825.706px;
+		height: 907.38px;
+		transform: matrix(1,0,0,1,-137.9108,249.0763) rotate(162deg);
+		transform-origin: center;
+		left: 0px;
+		top: 20vh;
+    }
+}
+
+
+.burgermenu-bar{
+    border-radius: 20px;
+    background: #FF0066;
+    height: 5px;
+    margin: 5px auto;
+    width: 1.8em;
+    transition: all 200ms ease-in-out;
+    &:nth-child(2){
+      width: 2.8em;
+    }
+  }
+  .burgermenu-container{
+    margin-right: 2em;
+  background: transparent;
+    height: 3em;
+    width: 3em;
+    position: relative;
+    padding-top: 0.4em;
+    border-radius: 100px;
+    transition: all 100ms ease-out;
+    &:hover{
+      cursor: pointer;
+      background: #FF0066;
+      & .burgermenu-bar{
+        background: white;
+        &:nth-child(1){
+          transform: scaleX(1.2);
+        }
+        &:nth-child(2){
+          transform: scaleX(0.8);
+        }
+        &:nth-child(3){
+          transform: scaleX(1.2);
+        }
+      }
+    }
+  }
+  
+ 
+
+  
+  

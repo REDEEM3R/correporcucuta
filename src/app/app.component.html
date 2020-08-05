@@ -1,0 +1,29 @@
+
+
+<div class="navbar is-fixed" [ngClass]="{'pulled-down': pulledNavbar === true}">
+    <div (click)="pullNavbar(!pulledNavbar)" [ngClass]="{'opaque': topPosition >= 80}">
+        <img src="../../../assets/images/main-logo-correporcucuta.com.png">
+        <h1> TOCA PARA <span>{{pulledNavbar === true? 'CERRAR' : 'ABRIR'}}</span></h1>
+    </div>
+    <div class="items-container">
+        <a [ngClass]="{'selected': curUrl === '/inicio'}" (click)="navigateTo('inicio')"><h1>INICIO</h1></a>
+        <a [ngClass]="{'selected': curUrl === '/registro'}" (click)="navigateTo('registro')"><h1>REGISTRO</h1></a>
+
+        <a  target="blank" href="https://www.xn--fundacinsoar-jhby.com/"><h1>FUNDACIÓN SOÑAR - DONACIONES</h1></a>
+        <!-- <a [ngClass]="{'selected': curUrl === '/acerca-de-la-carrera/21-kilometros'}" (click)="navigateTo('acerca-de-la-carrera/21-kilometros')"><h1>CARRERA 21K</h1></a>
+        <a [ngClass]="{'selected': curUrl === '/acerca-de-la-carrera/10-kilometros'}" (click)="navigateTo('acerca-de-la-carrera/10-kilometros')"><h1>CARRERA 10K</h1></a>
+        <a [ngClass]="{'selected': curUrl === '/acerca-de-la-carrera/5-kilometros'}" (click)="navigateTo('acerca-de-la-carrera/5-kilometros')"><h1>CARRERA 5K</h1></a> -->
+        <!-- <a [ngClass]="{'selected: navigatedRoute === 'inicio'}" href="inicio" href="acerca-de-la-carrera"><h1>INFORMACION Y REGISTRO</h1></a> -->
+        <!-- <a [ngClass]="{'selected: navigatedRoute === 'inicio'}" href="inicio" href="contacto"><h1>CONTACTO</h1></a> -->
+        <!-- <a><h1>ETIQUETANOS EN REDES</h1></a> -->
+
+    </div>
+
+    
+</div>
+<div class="router-container" >
+
+    <router-outlet></router-outlet>
+    <!-- <a class="pay-and-register" href="/registro" ><h1 style="position:absolute;color: black;font-weight: 400;font-size: 1.4rem;display: inline-block;padding: 0.4rem;margin-top: 0 ;letter-spacing: -2px;">Inscribete ahora y </h1><img src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png" style="margin-left:166px;margin-bottom: 0;height: 40px;display: inline-block;"></a>
+    <a class="credits" target="blank" href="https://2ovalles.com"><h1 class="flip-horizontal-bottom" style="text-align: right;margin-right: 20px;">Hecho con ♥️ doso'</h1></a> -->
+</div>
