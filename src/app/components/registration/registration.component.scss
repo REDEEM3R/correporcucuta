@@ -1,3 +1,21 @@
+.main-container{
+  width: 100vw;
+  max-width: 1360px;
+}
+.main-button{
+  font-size: 1.4rem;
+  font-family: 'Fjalla';
+  padding: 2rem;
+  width: max-content;
+  box-shadow: 0 0 40px -25px black!important;
+
+  &:hover{
+    box-shadow: 0 0 40px -15px black!important;
+    width: max-content;
+
+  }
+}
+
 .find-me{
     & > *{
         text-align: center;
@@ -6,87 +24,323 @@
     display: block;
     margin: 0 auto;
     & > label{
-        width: 100%;
-        display: block;
-        text-align: center;
+      width: 100%;
+      display: block;
+      text-align: center;
+      font-size: 1.2rem;
+      font-family: 'Fjalla';
+      margin-top: 5rem;
     }
-    & > input{
-        background-color: rgb(255, 255, 255);
-        border-radius: 0 0 10px 10px;
-        width: 300px;
-        display: block;
-        text-align: center;
-        padding: 1rem;
-        border: none;
-        color: rgb(63, 63, 63);
-        margin: 2rem auto;
-        font-size: 1.2rem;
+    & > input, >textarea{
+      width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    min-width: 40vw;
+    text-align: center;
+    font-size: 1.4rem;
+    font-family: "Fjalla";
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    box-shadow: none;
+    box-shadow: 0 0 30px -5px #9c2c34;
+    margin: 2rem auto;
+    display: block;
         &::placeholder{
             color: rgb(66, 66, 66);
             font-weight: 400;
         }
     }
     & > div{
-        text-align: center;
-        color: white;
-        padding: 0.5rem 1rem;
-        cursor: pointer;
-        width: min-content;
-        margin: 0 auto;
-        background-color: transparent;
-        border: 1px solid #FF5B8F;
-        &:hover{
-            transform: scale(0.95);
-        }
+      font-size: 1.8rem;
+    font-family: "Fjalla";
+    padding: 0.4rem 2rem;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    box-shadow: 0 0 40px -15px black !important;
+    margin: 0 auto;
+    cursor: pointer;
+    color: white;
+    transition: all linear 0.2s;
+    &:hover{
+
+    box-shadow: 0 0 40px -5px black !important;
+    }
     }
     & > .fourth{
         height: 20vh!important;
     }
 }
 
-@media screen and (max-width: 500px){
-    .find-me{
-        & > *{
-            text-align: center;
-        }
-        width: 90%!important;
-        display: block;
-        margin: 0 auto;
-        & > label{
-            width: 100%;
-            display: block;
-            text-align: center;
-        }
-        & > input{
-            background-color: white;
-            border-radius: 0 0 10px 10px;
-            width: 85%;
-            display: block;
-            text-align: center;
-            padding: 1rem;
-            border: none;
-            color: rgb(66, 66, 66);
-            margin: 2rem auto;
-            font-size: 1.2rem;
-            &::placeholder{
-                color: rgb(66, 66, 66);
-                font-weight: 400;
-            }
-        }
-        & > div{
-            text-align: center;
-            color: white;
-            padding: 0.5rem 0;
-            cursor: pointer;
-            background-color: transparent;
-            border: 3px solid white;
-            &:hover{
-                transform: scale(0.95);
-            }
-        }
-        & > .fourth{
-            height: 20vh!important;
-        }
+
+
+.column.is-5{
+  width: max-content;
+  margin: 10px auto;
+  max-width: 100%;
+  & > label{
+    font-size: 1.2rem;
+    width: max-content;
+    text-align: center;
+    color: white;
+    font-family: 'Fjalla';
+    width: 100%;
+    margin: 0 auto!important ;
+    display: block;
+  }
+  & > input, >textarea{
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    min-width: 40vw;
+    text-align: center;
+    font-size: 1.4rem;
+    font-family: "Fjalla";
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    box-shadow: none;
+    box-shadow: 0 0 30px -5px #9c2c34;
+    margin: 2rem auto;
+    display: block;
+  }
+  & > div:first-of-type{
+    width: -webkit-max-content !important;
+    width: -moz-max-content !important;
+    width: max-content !important;
+    width: 100% !important;
+    margin: 2rem auto;
+    background-color: transparent;
+    padding: 1rem 0rem;
+    border-radius: 5px;
+    text-align: center;
+    border: 3px solid transparent;
+    &:hover{
+      border: 3px solid white;
     }
-    
+
+    & > div{
+      transition: all linear 0.3s;
+    padding: 1rem;
+    font-size: 1rem;
+    font-family: "Fjalla";
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+    max-width: 65px;
+    width: 10vw;
+    height: 80px;
+    vertical-align: middle;
+    align-items: center;
+    display: inline;
+      &.selected{
+        background-color: rgba(255, 255, 255, 0.37);
+        color: white;
+      }
+      &:hover{
+        background-color: rgba(0, 0, 0, 0.116);
+        color: white;
+      }
+    }
+    & > img{
+      max-width: 33%;
+    }
+  }
+
 }
+.shirt-container{
+  & img{
+    max-width: 300px;
+  }
+  width: max-content;
+  max-width: 30%!important;
+}
+.charity-cause{
+  margin: 0 auto;
+  display: inline-block;
+
+}
+
+.registration-fee{
+  font-size: 2rem;
+  margin-top: 2rem;
+  & p{
+    font-family: 'Fjalla';
+    border: 3px solid white;
+    width: max-content;
+    margin: 0 auto;
+    border-radius: 5px;
+    padding: 2rem;
+    color: white;
+    box-shadow: 0 0 40px -10px black;
+
+  }
+}
+.terms-and-conditions, .terms-and-conditions *, .terms-and-conditions>a{
+  font-size: 1.2rem !important;
+    text-align: center;
+    font-size: 1.2rem;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    margin: 0 auto;
+    max-width: 90%;
+    font-family: "Fjalla" !important;
+}
+
+.disabled{
+  font-size: 1rem;
+  padding: 0;
+  width: 200px;
+  color: white;
+  background: rgba(255, 255, 255, 0.185);
+  margin: 2rem auto;
+  text-transform: uppercase;
+  font-family: "Fjalla";
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  font-size: 2rem;
+  box-shadow: 0 0 50px -20px black;
+  cursor: not-allowed;
+  text-align: center;
+  background: transparent!important;
+}
+
+.loading-modal{
+  position: fixed;
+  top: 60px;
+  width: 100vw;
+  background-color: white;
+  height: 100vh;
+  padding-top: 10rem;
+  &>p{
+    margin-top: 200px;
+    font-size: 4rem;
+    width: max-content;
+    margin:1rem auto;
+    display: block;
+
+  }
+  &>img{
+    width: 50vw;
+    min-width: 200px;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+.saved-registration{
+  position: relative;
+  display: block;
+  max-width: 90%;
+  & *{
+    font-family: 'Fjalla';
+  }
+  & >div{
+    width: max-content;
+    margin: 0 auto;
+    display: block;
+    max-width: 80%;
+    & > *{
+      margin: 0 auto;
+      text-align: center;
+    }
+  }
+}
+.saved-registration * ,.saved-registration * > * {
+  font-size: 1.4rem!important;
+}
+@media screen and (max-width: 500px){
+
+  .column.is-5{
+    width: max-content;
+    margin: 10px auto;
+    max-width: 100%;
+    & > label{
+      font-size: 1.2rem;
+      width: max-content;
+      text-align: center;
+      color: white;
+      font-family: 'Fjalla';
+      width: 100%;
+      margin: 0 auto!important ;
+      display: block;
+    }
+    & > input, >textarea{
+      width: -webkit-max-content;
+      width: -moz-max-content;
+      width: max-content;
+      min-width: 40vw;
+      text-align: center;
+      font-size: 1.4rem;
+      font-family: "Fjalla";
+      padding: 1rem;
+      border: none;
+      border-radius: 5px;
+      box-shadow: none;
+      box-shadow: 0 0 30px -5px #9c2c34;
+      margin: 2rem auto;
+      display: block;
+    }
+    & > div:first-of-type{
+      width: -webkit-max-content !important;
+      width: -moz-max-content !important;
+      width: max-content !important;
+      width: 100% !important;
+      margin: 2rem auto;
+      background-color: transparent;
+      padding: 1rem 0rem;
+      border-radius: 5px;
+      text-align: center;
+      border: 3px solid transparent;
+      &:hover{
+        border: 3px solid white;
+      }
+
+      & > div{
+        transition: all linear 0.3s;
+        padding: 1rem;
+        font-size: 1rem;
+        font-family: "Fjalla";
+        text-align: center;
+        cursor: pointer;
+        display: inline-block;
+        max-width: 100px;
+        width: 35vw;
+        height: max-content;
+        vertical-align: middle;
+        align-items: center;
+        display: inline-block;
+        &.selected{
+          background-color: rgba(255, 255, 255, 0.37);
+          color: white;
+        }
+        &:hover{
+          background-color: rgba(0, 0, 0, 0.116);
+          color: white;
+        }
+      }
+      & > img{
+        max-width: 33%;
+
+      }
+    }
+
+  }
+  .shirt-container{
+    display: block;
+    width: auto;
+    max-height: 60%;
+    &>img{
+      width: 100%;
+    }
+  }
+
+.charity-cause{
+  margin: 0 auto;
+  display: block;
+  max-width: 80vw;
+}
+  }

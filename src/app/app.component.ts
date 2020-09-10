@@ -16,9 +16,9 @@ export class AppComponent {
   @HostListener('window:scroll', ['$event'])
   onWindowScroll($event) {
     // console.log(window.pageYOffset);
-    this.topPosition = window.pageYOffset; 
+    this.topPosition = window.pageYOffset;
   }
-  
+
   public pullNavbar(bool){
     this.pulledNavbar = bool;
   }
@@ -41,11 +41,11 @@ export class AppComponent {
       // console.log(event);
       if (event instanceof NavigationEnd ) {
         this.curUrl = event.url;
-        console.log(this.curUrl);
+        // console.log(this.curUrl);
       }
     });
-    
-    
+
+
   }
   public navigateTo(url){
     if(url === this.curUrl){

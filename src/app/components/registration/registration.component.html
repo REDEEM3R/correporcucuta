@@ -1,118 +1,200 @@
 
-
-<div class="form-container">
-    <h1 style="height: 2rem;">INSCRIBETE</h1>
+<div *ngIf="raceSelected === 0" class="main-container" style="max-width: unset;">
+  <div class="form-container">
+    <h1 *ngIf="finishedRegistration === false && pendingRegistration.status === undefined && pendingRegistration.data === undefined" style="height: 2rem;">ATREVETE A CORRER CON NOSOTROS</h1>
+    <img class="charity-cause" src="../../../assets/images/logo-virtual.png">
+    <img class="charity-cause" src="../../../assets/images/fundacion-cancer-de-ninos.png">
     <div class="corner-form">
         <div class="find-me" *ngIf="finishedRegistration === false && pendingRegistration.status === undefined && pendingRegistration.data === undefined">
             <label for="socialsecurity name">Ingresa tu documento de identidad para comenzar el registro</label>
-            <input name="socialsecurity" type="text"  [(ngModel)]="document2search"  placeholder="Documento de identidad" >
-            <div (click)="getUnfinishedTransaction(document2search)">COMENZAR</div>
+            <input name="socialsecurity" type="number"  [(ngModel)]="document2search"  placeholder="Documento de identidad" >
+            <div class="main-button" (click)="getUnfinishedTransaction(document2search)">COMENZAR</div>
             <br><br>
             <h2 style="font-size: 0.8rem;">  Da click en el siguiente enlace para conocer el <a href="../../../assets/REGLAMENTO CORRE POR CÚCUTA.pdf" target="blank"><span style="text-decoration: underline;color: white;">Reglamento de la carrera</span></a></h2>
         </div>
-        <div class="find-me" *ngIf="finishedRegistration === false && pendingRegistration.status === true && pendingRegistration.data !== undefined">
-            <div class="fourth" style="width: 10%;cursor: pointer;display: block;position: absolute;right: 2rem;bottom: 0;height: 10vh;">
-                Si aun no has pagado, da click en el siguiente link.
-                <div *ngIf="pendingRegistration.data.distance === 5" style="margin: 1.2rem;"><a href="https://biz.payulatam.com/L0cd688D7B2ADC7" target="blank" style="bottom: 0;left: 0;margin: 0 auto;margin: 2rem;"><img style="margin: 0 auto;" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></div>
-                <div *ngIf="pendingRegistration.data.distance === 10" style="margin: 1.2rem;"><a href="https://biz.payulatam.com/L0cd688B16F3267" target="blank" style="bottom: 0;left: 0;margin: 0 auto;margin: 2rem;"><img style="margin: 0 auto;" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></div>
-                <div *ngIf="pendingRegistration.data.distance === 21" style="margin: 1.2rem;"><a href="https://biz.payulatam.com/L0cd688769F0699" target="blank" style="bottom: 0;left: 0;margin: 0 auto;margin: 2rem;"><img style="margin: 0 auto;" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></div>
+        <div class="saved-registration" >
+            <div *ngIf="finishedRegistration === false && pendingRegistration.status === true && pendingRegistration.data !== undefined">
+              <div style="padding: 2rem;
+              font-family: 'Fjalla';
+              font-size: 1.4rem!important;
+              text-align: justify;
+              background: white;
+              margin: 2rem auto;" *ngIf="pendingRegistration.data && pendingRegistration.data.paymentStatus === 1">
+                Felicidades {{pendingRegistration.data.name}}, tu pago ha sido registrado y has sido aceptado oficialmente en la carrera. <br><br>
+                Muchas gracias por apoyar a la Fundación Soñar y al evento Corre Por Cúcuta Virtual 2020.
+                <br>
+                <br>
+                En algunos días podrás acceder a todos los recursos digitales de la carrera. La fecha oficial de entrega de medallas y camisetas será anunciada pronto en Redes Sociales.
+              </div>
+              <div class="column is-5" style="width: max-content;">
+
+                <label  *ngIf="pendingRegistration.data  && pendingRegistration.data.distance " for="distancia" style="margin-right: 1rem;">Tu distancia</label>
+                <label  *ngIf="pendingRegistration.data && pendingRegistration.data.distance === undefined " for="distancia" style="margin-right: 1rem;">Confirma tu distancia</label>
+                <div>
+                    <div (click)="updateSelectedDistanceBackup(5)" class="button-distance small" [ngClass]="{'selected': pendingRegistration.data && pendingRegistration.data.distance === 5}">5K</div>
+                    <div (click)="updateSelectedDistanceBackup(10)"  class="button-distance small" [ngClass]="{'selected': pendingRegistration.data && pendingRegistration.data.distance === 10}">10K</div>
+                    <div (click)="updateSelectedDistanceBackup(21)"  class="button-distance small" [ngClass]="{'selected': pendingRegistration.data && pendingRegistration.data.distance === 21}">21K</div>
+
+                </div>
+
             </div>
-            <h1 style="font-size: 1rem;text-align: center;"> Hola, <span style="font-size: 1.2rem;color: white;">{{pendingRegistration.data.name}}</span><br><br> <span *ngIf="pendingRegistration.data.gender === 'M'" style="color: white;">Estas registrado  para la carrera {{pendingRegistration.data.distance}}K</span><span style="color: white;" *ngIf="pendingRegistration.data.gender === 'F'">Estas registrada para la carrera {{pendingRegistration.data.distance}}K</span><br><br>Seras notificado via email cuando el pago haya sido procesado. <br><br> <span style="text-decoration: underline;color: white;font-size: 0.8rem;">El proceso de verificacion del pago toma de 24h a 36h.</span>
+            <div *ngIf="pendingRegistration && pendingRegistration.data && pendingRegistration.data.address === undefined" class="column is-5" style="width: max-content;">
+              <label  *ngIf="pendingRegistration.data.address  !== undefined" for="distancia" style="margin-right: 1rem;">Dirección para tus entregas</label>
+              <label  *ngIf="pendingRegistration.data.address === undefined " for="distancia" style="margin-right: 1rem;">Confirma tu dirección</label>
+              <textarea (keydown)="setPendingTrue()" name="address"  [(ngModel)]="pendingRegistration.data.address"  placeholder="Calle 1 #1-10 Barrio Primero, Apartamento 4004, Cucuta" >
+              </textarea>
+            </div>
+            <div *ngIf="pendingRegistration && pendingRegistration.data && pendingRegistration.data.address" class="column is-5" style="width: max-content;">
+              <label  *ngIf="pendingRegistration.data.address  !== undefined" for="distancia" style="margin-right: 1rem;">Dirección para tus entregas</label>
+              <label  *ngIf="pendingRegistration.data.address === undefined " for="distancia" style="margin-right: 1rem;">Confirma tu dirección</label>
+              <textarea (keydown)="setPendingTrue()" name="address"  [(ngModel)]="pendingRegistration.data.address"  placeholder="Calle 1 #1-10 Barrio Primero, Apartamento 4004, Cucuta" >
+              </textarea>
+            </div>
+            <button *ngIf="(pendingRegistration.data && (pendingRegistration.data.distance === undefined || pendingRegistration.data.distance === null))  || (pendingRegistration.data && (pendingRegistration.data.address === undefined || pendingRegistration.data.address === null) ) || (pendingRegistration.updating !== undefined && pendingRegistration.updating === true)" class="main-button" [disabled]="pendingRegistration.data.address === undefined" (click)="updateExistingRegistry(pendingRegistration.data)">
+              ACTUALIZAR
+            </button>
+            <div *ngIf="pendingRegistration.data && pendingRegistration.data.paymentStatus === 0">
+                Si aun no has pagado, da click en el siguiente link.
+                <!-- <div *ngIf="pendingRegistration.data.distance === 5" style="margin: 1.2rem;"><a href="https://biz.payulatam.com/L0cd688D7B2ADC7" target="blank" style="bottom: 0;left: 0;margin: 0 auto;margin: 2rem;"><img style="margin: 0 auto;" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></div>
+                <div *ngIf="pendingRegistration.data.distance === 10" style="margin: 1.2rem;"><a href="https://biz.payulatam.com/L0cd688B16F3267" target="blank" style="bottom: 0;left: 0;margin: 0 auto;margin: 2rem;"><img style="margin: 0 auto;" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></div>
+                <div *ngIf="pendingRegistration.data.distance === 21" style="margin: 1.2rem;"><a href="https://biz.payulatam.com/L0cd688769F0699" target="blank" style="bottom: 0;left: 0;margin: 0 auto;margin: 2rem;"><img style="margin: 0 auto;" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></div> -->
+                <div *ngIf="pendingRegistration.data && pendingRegistration.data.registrationType === 2" style="margin: 1.2rem;"><a href="https://biz.payulatam.com/L0cd6885FE0F5E3" target="blank" style="bottom: 0;left: 0;margin: 0 auto;margin: 2rem;"><img style="margin: 0 auto;" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></div>
+                <div *ngIf="pendingRegistration.data &&  pendingRegistration.data.registrationType === 3" style="margin: 1.2rem;"><a href="https://biz.payulatam.com/L0cd6889632E2E2" target="blank" style="bottom: 0;left: 0;margin: 0 auto;margin: 2rem;"><img style="margin: 0 auto;" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></div>
+                <div *ngIf="pendingRegistration.data && pendingRegistration.data.registrationType === 4" style="margin: 1.2rem;"><a href="https://biz.payulatam.com/L0cd688F403A47F" target="blank" style="bottom: 0;left: 0;margin: 0 auto;margin: 2rem;"><img style="margin: 0 auto;" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></div>
+            </div>
+            <h1 style="font-size: 1rem;text-align: center;"> Hola, <span style="font-size: 1.2rem;color: white;">{{pendingRegistration.data ? pendingRegistration.data.name: ''}}</span><br><br> <span *ngIf="pendingRegistration.data && pendingRegistration.data.gender === 'M'" style="color: white;">{{pendingRegistration.data && pendingRegistration.data.registrationType === 1?'Registro Gratis':pendingRegistration.data && pendingRegistration.data.registrationType === 2?'Registro Gratis + Medalla Finisher':pendingRegistration.data && pendingRegistration.data.registrationType === 3?'Registro Gratis + Camisa Finisher' : pendingRegistration.data && pendingRegistration.data.registrationType === 4 ? 'Registro Gratis + Medalla + Camisa Finisher' : ''}}</span><span style="color: white;" *ngIf="pendingRegistration.data && pendingRegistration.data.gender === 'F'">{{pendingRegistration.data && pendingRegistration.data.registrationType === 1?'Registro Gratis':pendingRegistration.data.registrationType === 2?'Registro Gratis + Medalla Finisher':pendingRegistration.data.registrationType === 3?'Registro Gratis + Camisa Finisher' : pendingRegistration.data.registrationType === 4 ? 'Registro Gratis + Medalla + Camisa Finisher' : ''}}</span><br><br> {{pendingRegistration.data && pendingRegistration.data.paymentStatus === 0 ? 'Seras notificado via email cuando el pago haya sido procesado.': ''}} <br><br> <span style="text-decoration: underline;color: white;font-size: 0.8rem;">{{pendingRegistration.data && pendingRegistration.data.paymentStatus === 0 ? 'El proceso de verificacion del pago toma de 24h a 36h.': ''}}</span>
+
+              <img style="width: 60%;min-width: 280px;margin: 0 auto;" *ngIf="pendingRegistration.data && pendingRegistration.data.shirtOption === 0" src="../../../assets/images/camisa-oficial-corre-por-cucuta-negra.png">
+              <img style="width: 60%;min-width: 280px;margin: 0 auto;"  *ngIf="pendingRegistration.data && pendingRegistration.data.shirtOption === 1" src="../../../assets/images/camisa-oficial-corre-por-cucuta-azul.png">
+              <img style="width: 60%;min-width: 280px;margin: 0 auto;" *ngIf="pendingRegistration.data && pendingRegistration.data.shirtOption === 2" src="../../../assets/images/camisa-oficial-corre-por-cucuta-rosa.png">
            </h1>
+
+           <div (click)="resetSignup()">
+             Nuevo registro
+           </div>
         </div>
+      </div>
+      <div>
         <div *ngIf="finishedRegistration === false && pendingRegistration.status === false && pendingRegistration.data === undefined">
-            <h1 style="font-size: 1.2rem;height: 1.4rem;color: white;width: max-content;margin: 0 auto;">Datos Personales</h1>
-            <div class="first" style="width: 30%;position: relative;">
-                <div class="column is-5">
+            <h1 style="font-size: 2rem;
+            height: max-content;
+            color: white;
+            width: max-content;
+            margin: 0 auto;
+            font-family: 'Fjalla';
+            max-width: 100%;
+            text-align: center;">Datos personales y de registro</h1>
+
+          <div class="column is-5" style="height: max-content;">
+              <label for="email" style="margin-right: 1rem;">Tipo de registro</label>
+
+              <div style="width: 100%;" >
+                  <div (click)="updateSelectedRegistration(1)" class="button-distance" [ngClass]="{'selected': newSignup && newSignup.registrationType === 1}">SOLO REGISTRO GRATIS</div>
+                  <div (click)="updateSelectedRegistration(2)" class="button-distance" [ngClass]="{'selected': newSignup && newSignup.registrationType === 2}">REGISTRO GRATIS + MEDALLA</div>
+                  <div (click)="updateSelectedRegistration(3)" class="button-distance" [ngClass]="{'selected': newSignup && newSignup.registrationType === 3}">REGISTRO GRATIS + CAMISA</div>
+                  <div (click)="updateSelectedRegistration(4)" class="button-distance" [ngClass]="{'selected': newSignup && newSignup.registrationType === 4}">REGISTRO GRATIS + CAMISA + MEDALLA</div>
+              </div>
+
+
+          </div>
+
+          <div class="column is-5">
+              <label for="email" style="margin-right: 1rem;">Tipo de Sangre</label>
+              <div  style="width: 100%;">
+                  <div (click)="updateSelectedBloodType('A+')" class="button-distance small"  [ngClass]="{'selected': newSignup && newSignup.bloodType === 'A+'}">A+</div>
+                  <div (click)="updateSelectedBloodType('A-')"  class="button-distance small"  [ngClass]="{'selected': newSignup && newSignup.bloodType === 'A-'}">A-</div>
+                  <div (click)="updateSelectedBloodType('B+')" class="button-distance small"  [ngClass]="{'selected': newSignup && newSignup.bloodType === 'B+'}">B+</div>
+                  <div (click)="updateSelectedBloodType('B-')"  class="button-distance small"  [ngClass]="{'selected': newSignup && newSignup.bloodType === 'B-'}">B-</div>
+                  <div (click)="updateSelectedBloodType('O+')" class="button-distance small"  [ngClass]="{'selected': newSignup && newSignup.bloodType === 'O+'}">O+</div>
+                  <div (click)="updateSelectedBloodType('O-')"  class="button-distance small"  [ngClass]="{'selected': newSignup && newSignup.bloodType === 'O-'}">O-</div>
+                  <div (click)="updateSelectedBloodType('AB+')" class="button-distance small"  [ngClass]="{'selected': newSignup && newSignup.bloodType === 'AB+'}">AB+</div>
+                  <div (click)="updateSelectedBloodType('AB-')"  class="button-distance small"  [ngClass]="{'selected': newSignup && newSignup.bloodType === 'AB-'}">AB-</div>
+              </div>
+          </div>
+          <div class="column is-5" style="width: max-content;">
+              <label for="email" style="margin-right: 1rem;">Soy</label>
+              <div style="width: 100%;">
+                  <div (click)="updateSelectedGender('M')" [ngClass]="{'selected': newSignup && newSignup.gender === 'M'}">HOMBRE</div>
+                  <div (click)="updateSelectedGender('F')"  [ngClass]="{'selected': newSignup && newSignup.gender === 'F'}">MUJER</div>
+              </div>
+          </div>
+          <div class="column is-5" style="width: max-content;">
+            <label for="email" style="margin-right: 1rem;">Distancia</label>
+            <div>
+                <div (click)="updateSelectedDistance(5)" class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.distance === 5}">5K</div>
+                <div (click)="updateSelectedDistance(10)"  class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.distance === 10}">10K</div>
+                <div (click)="updateSelectedDistance(21)"  class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.distance === 21}">21K</div>
+            </div>
+          </div>
+            <div *ngIf="newSignup && newSignup.registrationType !== undefined && (newSignup.registrationType === 3 || newSignup.registrationType === 4)" class="column is-5" style="width: max-content;">
+              <label for="email" style="margin-right: 1rem;">Talla</label>
+              <div>
+                  <div (click)="updateSelectedSize('S')" class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.size === 'S'}">S</div>
+                  <div (click)="updateSelectedSize('M')"  class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.size === 'M'}">M</div>
+                  <div (click)="updateSelectedSize('L')"  class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.size === 'L'}">L</div>
+                  <div (click)="updateSelectedSize('XL')"  class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.size === 'XL'}">XL</div>
+              </div>
+        </div>
+        <div *ngIf="newSignup && newSignup.registrationType !== undefined && (newSignup.registrationType === 2 || newSignup.registrationType === 3 || newSignup.registrationType === 4)" class="column is-5" style="width: max-content;">
+          <label for="address" style="margin-right: 1rem;">Dirección de entrega para tus compras</label>
+          <textarea name="address"  [(ngModel)]="newSignup.address"  placeholder="Calle 1 #1-10 Barrio Primero, Apartamento 4004, Cucuta" >
+          </textarea>
+      </div>
+      <div *ngIf="newSignup && newSignup.registrationType !== undefined" class="column is-5" style="width: max-content;">
+        <label for="city" style="margin-right: 1rem;">Ciudad y Pais</label>
+        <input name="city"  [(ngModel)]="newSignup.city"  placeholder="Cucuta, Colombia" >
+    </div>
+          <div *ngIf="newSignup && newSignup.registrationType !== undefined && (newSignup.registrationType === 3 || newSignup.registrationType === 4)" class="column is-5" style="width: max-content;">
+            <label for="email" style="margin-right: 1rem;">ESCOGE TU COLOR DE CAMISA</label>
+            <div>
+              <h2 style="font-family: 'Fjalla';">
+                Camisas de referencia
+              </h2>
+                <div class="shirt-container" (click)="updateSelectedShirt(0)" [ngClass]="{'selected': newSignup && newSignup.shirtOption === 0}"><img src="../../../assets/images/camisa-oficial-corre-por-cucuta-negra.png"></div>
+                <div class="shirt-container" (click)="updateSelectedShirt(1)" [ngClass]="{'selected': newSignup && newSignup.shirtOption === 1}"><img src="../../../assets/images/camisa-oficial-corre-por-cucuta-azul.png"></div>
+                <div class="shirt-container" (click)="updateSelectedShirt(2)" [ngClass]="{'selected': newSignup && newSignup.shirtOption === 2}"><img src="../../../assets/images/camisa-oficial-corre-por-cucuta-rosa.png"></div>
+            </div>
+        </div>
+              <div class="column is-5">
+                  <label for="cedula" >Documento de Identidad</label>
+                  <input name="cedula" type="number" placeholder="Numero de Cedula" [(ngModel)]="newSignup.identityDocument" >
+              </div>
+              <div class="column is-5">
+                  <label for="socialsecurity name">EPS o Seguro</label>
+                  <input name="socialsecurity" type="text"  [(ngModel)]="newSignup.eps"  placeholder="Tu EPS o seguro" >
+              </div>
+              <div class="column is-5 name">
+                  <label for="fullname" >Nombre y Apellido</label>
+                  <input name="fullname" type="text"  [(ngModel)]="newSignup.name"  placeholder="Tu nombre y apellido" >
+              </div>
+              <div class="column is-5 name">
+                  <label for="email" >Correo</label>
+                  <input name="email" type="email" placeholder="tucorreo@mail.com" [(ngModel)]="newSignup.email" >
+              </div>
+              <div class="column is-5 name">
+                  <label for="instagram" >Instagram</label>
+                  <input name="instagram" type="instagram" placeholder="@miinstagram" [(ngModel)]="newSignup.instagram" >
+              </div>
+              <div class="column is-5">
+                  <label for="phonenumber" style="margin-right: 1rem;">Número Celular</label>
+                  <input name="phonenumber" type="number" placeholder="Numero de Teléfono" [(ngModel)]="newSignup.phone_number" >
+              </div>
+
+            <!-- <div> -->
+                <!-- <div class="column is-5">
                     <label for="email" style="margin-right: 1rem;">Distancia</label>
                     <div>
                         <div (click)="updateSelectedDistance(21)" class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.distance === 21}">21K</div>
                         <div (click)="updateSelectedDistance(10)"  class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.distance === 10}">10K</div>
                         <div (click)="updateSelectedDistance(5)"  class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.distance === 5}">5K</div>
                     </div>
-                </div>
-                <div class="column is-5">
-                    <label for="email" style="margin-right: 1rem;">Talla</label>
-                    <div>
-                        <div (click)="updateSelectedSize('S')" class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.size === 'S'}">S</div>
-                        <div (click)="updateSelectedSize('M')"  class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.size === 'M'}">M</div>
-                        <div (click)="updateSelectedSize('L')"  class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.size === 'L'}">L</div>
-                        <div (click)="updateSelectedSize('XL')"  class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.size === 'XL'}">XL</div>
-                    </div>
-                    
-                </div>                   
-                <div class="column is-5" style="height: max-content;">
-                    <label for="email" style="margin-right: 1rem;">Edad y Categoria</label>
-                    <div style="width: 100%;" *ngIf="newSignup && newSignup.distance === 5">
-                        <div (click)="updateSelectedAge(0)" class="button-distance" [ngClass]="{'selected': newSignup && newSignup.age === 0}">RECREATIVA - SIN LIMITE DE EDAD</div>
-                    </div>
-                    <div style="width: 100%;"  *ngIf="newSignup && newSignup.distance === 10">
-                        <div (click)="updateSelectedAge(1)" class="button-distance" [ngClass]="{'selected': newSignup && newSignup.age === 1}">JUVENIL - 18 A 19 AÑOS</div>
-                        <div (click)="updateSelectedAge(2)" class="button-distance" [ngClass]="{'selected': newSignup && newSignup.age === 2}">ABIERTA - 20 A 39 AÑOS</div>
-                        <div (click)="updateSelectedAge(3)" class="button-distance" [ngClass]="{'selected': newSignup && newSignup.age === 3}">VETERANOS - 40 A 49 AÑOS</div>
-                        <div (click)="updateSelectedAge(4)" class="button-distance" [ngClass]="{'selected': newSignup && newSignup.age === 4}">PLUS - 50 AÑOS O MÁS</div>
-                    </div>
-                    <div  style="width: 100%;" *ngIf="newSignup && newSignup.distance === 21">
-                        <div (click)="updateSelectedAge(5)" class="button-distance" [ngClass]="{'selected': newSignup && newSignup.age === 5}">ABIERTA - 20 A 39 AÑOS</div>
-                        <div (click)="updateSelectedAge(6)" class="button-distance" [ngClass]="{'selected': newSignup && newSignup.age === 6}">VETERANOS - 40 A 49 AÑOS</div>
-                        <div (click)="updateSelectedAge(7)" class="button-distance" [ngClass]="{'selected': newSignup && newSignup.age === 7}">PLUS - 50 AÑOS O MÁS</div>
-                    </div>
-                    
+                </div> -->
 
-                </div>
-                
-                <div class="column is-5">
-                    <label for="email" style="margin-right: 1rem;">Tipo de Sangre</label>
-                    <div  style="width: 100%;">
-                        <div (click)="updateSelectedBloodType('A+')" class="button-distance small" style="padding: 0.2rem;" [ngClass]="{'selected': newSignup && newSignup.bloodType === 'A+'}">A+</div>
-                        <div (click)="updateSelectedBloodType('A-')"  class="button-distance small" style="padding: 0.2rem;" [ngClass]="{'selected': newSignup && newSignup.bloodType === 'A-'}">A-</div>
-                        <div (click)="updateSelectedBloodType('B+')" class="button-distance small" style="padding: 0.2rem;" [ngClass]="{'selected': newSignup && newSignup.bloodType === 'B+'}">B+</div>
-                        <div (click)="updateSelectedBloodType('B-')"  class="button-distance small" style="padding: 0.2rem;" [ngClass]="{'selected': newSignup && newSignup.bloodType === 'B-'}">B-</div>
-                        <div (click)="updateSelectedBloodType('O+')" class="button-distance small" style="padding: 0.2rem;" [ngClass]="{'selected': newSignup && newSignup.bloodType === 'O+'}">O+</div>
-                        <div (click)="updateSelectedBloodType('O-')"  class="button-distance small" style="padding: 0.2rem;" [ngClass]="{'selected': newSignup && newSignup.bloodType === 'O-'}">O-</div>
-                        <div (click)="updateSelectedBloodType('AB+')" class="button-distance small" style="padding: 0.2rem;" [ngClass]="{'selected': newSignup && newSignup.bloodType === 'AB+'}">AB+</div>
-                        <div (click)="updateSelectedBloodType('AB-')"  class="button-distance small" style="padding: 0.2rem;" [ngClass]="{'selected': newSignup && newSignup.bloodType === 'AB-'}">AB-</div>
-                    </div>
-                </div>
-                <div class="column is-5" style="width: max-content;">
-                    <label for="email" style="margin-right: 1rem;">Genero</label>
-                    <div>
-                        <div (click)="updateSelectedGender('M')" class="button-distance  small" style="padding: 0.2rem;" [ngClass]="{'selected': newSignup && newSignup.gender === 'M'}">M</div>
-                        <div (click)="updateSelectedGender('F')"  class="button-distance  small" style="padding: 0.2rem;" [ngClass]="{'selected': newSignup && newSignup.gender === 'F'}">F</div>
-                    </div>
-                </div>
-                
-            </div>
-            
-            <div class="second" style="width: 30%;position: relative;">
-                <div class="column is-5">
-                    <label for="identification" >Documento de Identidad</label>
-                    <input name="identification" type="number" placeholder="Numero de Cedula" [(ngModel)]="newSignup.identity_document" >
-                </div>
-                <div class="column is-5">
-                    <label for="socialsecurity name">EPS o Seguro</label>
-                    <input name="socialsecurity" type="text"  [(ngModel)]="newSignup.eps"  placeholder="Tu EPS o seguro" >
-                </div>
-                <div class="column is-5 name">
-                    <label for="fullname" >Nombre y Apellido</label>
-                    <input name="fullname" type="text"  [(ngModel)]="newSignup.name"  placeholder="Tu nombre y apellido" >
-                </div>
-                <div class="column is-5 name">
-                    <label for="email" >Correo</label>
-                    <input name="email" type="email" placeholder="tucorreo@mail.com" [(ngModel)]="newSignup.email" >
-                </div>
-                <div class="column is-5 name">
-                    <label for="instagram" >Instagram</label>
-                    <input name="instagram" type="instagram" placeholder="@miinstagram" [(ngModel)]="newSignup.instagram" >
-                </div>
-                <div class="column is-5">
-                    <label for="phonenumber" style="margin-right: 1rem;">Número Celular</label>
-                    <input name="phonenumber" type="number" placeholder="Numero de Teléfono" [(ngModel)]="newSignup.phone_number" >
-                </div>
-               
-            </div>
-            <div class="third" style="width: 10%;position: relative;">
-                <h1 style="font-size: 1.2rem;height: 1.4rem;color: white;width: max-content;margin: 0 auto;">Contacto de Emergencia</h1>
+
+            <!-- </div> -->
+
+            <div>
+                <h1 style="font-size: 1.2rem;height: 1.4rem;color: white;width: max-content;margin: 0 auto;font-family: 'Fjalla';">Contacto de Emergencia</h1>
                 <div class="column is-5 name">
                     <label for="emergency-name" >Nombre y apellido</label>
                     <input name="emergency-name" type="text"  [(ngModel)]="newSignup.contact.name"  placeholder="Nombre y apellido de tu contacto" >
@@ -126,19 +208,281 @@
                     <input name="emergency-relation" type="text"  [(ngModel)]="newSignup.contact.relation"  placeholder="Padre, madre, hermano, etc." >
                 </div>
             </div>
-            <div class="fourth" style="width: 10%;cursor: pointer;display: block;position: absolute;right: 2rem;bottom: 0;">
-                <h2 style="font-size: 0.8rem;"> <input type="checkbox"> Acepto los terminos y condiciones consignados en el <a href="../../../assets/REGLAMENTO CORRE POR CÚCUTA.pdf" target="blank"><span style="text-decoration: underline;color: white;">Reglamento de la carrera</span></a></h2>
-                <h1 *ngIf="newSignup && newSignup.distance === undefined" style="font-size: 1rem;padding: 0.25rem;width: 200px;color: white;background: rgba(255, 255, 255, 0.185);" [ngClass]="{'disabled':  newSignup.identity_document === undefined || newSignup.bloodType === undefined || newSignup.eps === undefined || newSignup.size === undefined ||  newSignup.age === undefined ||  newSignup.gender === undefined ||  newSignup.distance === undefined ||  newSignup.email === undefined ||  newSignup.name === undefined}">Completa el formulario</h1>
-                <h1 *ngIf="newSignup && newSignup.distance === 21" style="font-size: 1rem;padding: 0.25rem;width: 200px;color: white;background: rgba(255, 255, 255, 0.185);" [ngClass]="{'disabled':  newSignup.identity_document === undefined || newSignup.bloodType === undefined || newSignup.eps === undefined || newSignup.size === undefined ||  newSignup.age === undefined ||  newSignup.gender === undefined ||  newSignup.distance === undefined ||  newSignup.email === undefined ||  newSignup.name === undefined}" (click)="readSignup(newSignup)"><a href="https://biz.payulatam.com/L0cd688769F0699" target="blank" style="position: absolute;bottom: 0;left: 0;"><img src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></h1>
-                <h1 *ngIf="newSignup && newSignup.distance === 10" style="font-size: 1rem;padding: 0.25rem;width: 200px;color: white;background: rgba(255, 255, 255, 0.185);" [ngClass]="{'disabled':  newSignup.identity_document === undefined || newSignup.bloodType === undefined || newSignup.eps === undefined || newSignup.size === undefined ||  newSignup.age === undefined ||  newSignup.gender === undefined ||  newSignup.distance === undefined ||  newSignup.email === undefined ||  newSignup.name === undefined}" (click)="readSignup(newSignup)"><a href="https://biz.payulatam.com/L0cd688B16F3267" target="blank" style="position: absolute;bottom: 0;left: 0;"><img src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></h1>
-                <h1 *ngIf="newSignup && newSignup.distance === 5" style="font-size: 1rem;padding: 0.25rem;width: 200px;color: white;background: rgba(255, 255, 255, 0.185);" [ngClass]="{'disabled':  newSignup.identity_document === undefined || newSignup.bloodType === undefined || newSignup.eps === undefined || newSignup.size === undefined ||  newSignup.age === undefined ||  newSignup.gender === undefined ||  newSignup.distance === undefined ||  newSignup.email === undefined ||  newSignup.name === undefined}" (click)="readSignup(newSignup)"><a href="https://biz.payulatam.com/L0cd688D7B2ADC7" target="blank" style="position: absolute;bottom: 0;left: 0;"><img src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></h1>
+            <div >
+                <h2 class="terms-and-conditions" style="font-size: 0.8rem;"> <input type="checkbox"> Acepto los terminos y condiciones consignados en el <a href="../../../assets/REGLAMENTO CORRE POR CÚCUTA.pdf" target="blank"><span style="text-decoration: underline;color: white;">Reglamento de la carrera</span></a></h2>
+
+              <div class="registration-fee" *ngIf="newSignup && newSignup.registrationType">
+                <p>{{newSignup.registrationType === 1? 'GRATIS' : newSignup.registrationType === 2? '$ 30.000' : newSignup.registrationType === 3 ? '$ 50.000' : newSignup.registrationType === 4? '$ 55.000' : '' }}</p>
+              </div>
+                <h1 *ngIf="newSignup && newSignup.registrationType === 1" style="    font-size: 1rem;
+                padding: 0.25rem;
+                width: max-content;
+                color: white;
+                background: rgba(255, 255, 255, 0.185);
+                margin: 2rem auto;
+                padding: 2rem;
+                text-align: center;
+                border-radius: 5px;
+                box-shadow: 0 0 40px -10px #000;
+                border: 3px solid;
+                background: white;
+                font-family: 'Fjalla';
+                color: #e9414d;" (click)="readSignup(newSignup)">ENVIAR MIS DATOS</h1>
+
+                <h1 *ngIf="newSignup && newSignup.registrationType === 2" style="font-size: 1rem;padding: 0.25rem;width: 200px;color: white;background: rgba(255, 255, 255, 0.185);" [ngClass]="{'disabled':  newSignup.identityDocument === undefined || newSignup.bloodType === undefined || newSignup.eps === undefined || newSignup.size === undefined ||  newSignup.age === undefined ||  newSignup.gender === undefined ||  newSignup.distance === undefined ||  newSignup.email === undefined ||  newSignup.name === undefined}" (click)="readSignup(newSignup)">Haz click para pagar y registrarte<br><a href="https://biz.payulatam.com/L0cd6885FE0F5E3" target="blank" style="position: relative;bottom: 0;left: 0;"><img style="position: relative;width: 200px;" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></h1>
+                <h1 *ngIf="newSignup && newSignup.registrationType === 3" style="font-size: 1rem;padding: 0.25rem;width: 200px;color: white;background: rgba(255, 255, 255, 0.185);" [ngClass]="{'disabled':  newSignup.identityDocument === undefined || newSignup.bloodType === undefined || newSignup.eps === undefined || newSignup.size === undefined ||  newSignup.age === undefined ||  newSignup.gender === undefined ||  newSignup.distance === undefined ||  newSignup.email === undefined ||  newSignup.name === undefined}" (click)="readSignup(newSignup)">Haz click para pagar y registrarte<br><a href="https://biz.payulatam.com/L0cd6889632E2E2" target="blank" style="position: relative;bottom: 0;left: 0;"><img style="position: relative;width: 200px;" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></h1>
+                <h1 *ngIf="newSignup && newSignup.registrationType === 4" style="font-size: 1rem;padding: 0.25rem;width: 200px;color: white;background: rgba(255, 255, 255, 0.185);" [ngClass]="{'disabled':  newSignup.identityDocument === undefined || newSignup.bloodType === undefined || newSignup.eps === undefined || newSignup.size === undefined ||  newSignup.age === undefined ||  newSignup.gender === undefined ||  newSignup.distance === undefined ||  newSignup.email === undefined ||  newSignup.name === undefined}" (click)="readSignup(newSignup)">Haz click para pagar y registrarte<br><a href="https://biz.payulatam.com/L0cd688F403A47F" target="blank" style="position: relative;bottom: 0;left: 0;"><img style="position: relative;width: 200px;" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></h1>
             </div>
         </div>
+
         <div *ngIf="finishedRegistration === true">
             <h1 style="padding:0.4rem">Gracias por Registrarte. </h1>
             <h1 style="font-size: 1rem;color: white;padding: 0.4rem;">Finaliza el proceso de pago en el link de PayU. El proceso de verificacion del pago toma de 24h a 36h</h1>
+            <h1 *ngIf="newSignup && newSignup.registrationType === 2" style="font-size: 1rem;padding: 0.25rem;width: 200px;color: white;background: rgba(255, 255, 255, 0.185);" [ngClass]="{'disabled':  newSignup.identityDocument === undefined || newSignup.bloodType === undefined || newSignup.eps === undefined || newSignup.size === undefined ||  newSignup.age === undefined ||  newSignup.gender === undefined ||  newSignup.distance === undefined ||  newSignup.email === undefined ||  newSignup.name === undefined}" (click)="readSignup(newSignup)"><a href="https://biz.payulatam.com/L0cd6885FE0F5E3" target="blank" style="position: absolute;bottom: 0;left: 0;"><img src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></h1>
+            <h1 *ngIf="newSignup && newSignup.registrationType === 3" style="font-size: 1rem;padding: 0.25rem;width: 200px;color: white;background: rgba(255, 255, 255, 0.185);" [ngClass]="{'disabled':  newSignup.identityDocument === undefined || newSignup.bloodType === undefined || newSignup.eps === undefined || newSignup.size === undefined ||  newSignup.age === undefined ||  newSignup.gender === undefined ||  newSignup.distance === undefined ||  newSignup.email === undefined ||  newSignup.name === undefined}" (click)="readSignup(newSignup)"><a href="https://biz.payulatam.com/L0cd6889632E2E2" target="blank" style="position: absolute;bottom: 0;left: 0;"><img src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></h1>
+            <h1 *ngIf="newSignup && newSignup.registrationType === 4" style="font-size: 1rem;padding: 0.25rem;width: 200px;color: white;background: rgba(255, 255, 255, 0.185);" [ngClass]="{'disabled':  newSignup.identityDocument === undefined || newSignup.bloodType === undefined || newSignup.eps === undefined || newSignup.size === undefined ||  newSignup.age === undefined ||  newSignup.gender === undefined ||  newSignup.distance === undefined ||  newSignup.email === undefined ||  newSignup.name === undefined}" (click)="readSignup(newSignup)"><a href="https://biz.payulatam.com/L0cd688F403A47F" target="blank" style="position: absolute;bottom: 0;left: 0;"><img src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></h1>
         </div>
     </div>
-    
+
 </div>
-    
+
+</div>
+
+<div class="loading-modal" *ngIf="loading === true">
+  <p style="font-family: 'Fjalla';">
+    CARGANDO
+  </p>
+  <img src="../../../assets/images/new-logo-try.png">
+
+</div>
+
+<div *ngIf="raceSelected === 1" class="main-container" style="max-width: unset;">
+  <div class="form-container">
+    <h1 *ngIf="finishedRegistration === false && pendingRegistration.status === undefined && pendingRegistration.data === undefined" style="height: 2rem;">ATREVETE A CORRER CON NOSOTROS</h1>
+    <img class="charity-cause" src="../../../assets/images/logo-virtual.png">
+    <img class="charity-cause" src="../../../assets/images/fundacion-cancer-de-ninos.png">
+    <div class="corner-form">
+        <div class="find-me" *ngIf="finishedRegistration === false && pendingRegistration.status === undefined && pendingRegistration.data === undefined">
+            <label for="socialsecurity name">Ingresa tu documento de identidad para comenzar el registro</label>
+            <input name="socialsecurity" type="number"  [(ngModel)]="document2search"  placeholder="Documento de identidad" >
+            <div class="main-button" (click)="getUnfinishedTransaction(document2search)">COMENZAR</div>
+            <br><br>
+            <h2 style="font-size: 0.8rem;">  Da click en el siguiente enlace para conocer el <a href="../../../assets/REGLAMENTO CORRE POR CÚCUTA.pdf" target="blank"><span style="text-decoration: underline;color: white;">Reglamento de la carrera</span></a></h2>
+        </div>
+        <div class="saved-registration" >
+            <div *ngIf="finishedRegistration === false && pendingRegistration.status === true && pendingRegistration.data !== undefined">
+              <div class="column is-5" style="width: max-content;">
+                <label  *ngIf="pendingRegistration.data.distance " for="distancia" style="margin-right: 1rem;">Distancia para tu hijo</label>
+                <label  *ngIf="pendingRegistration.data.distance === undefined " for="distancia" style="margin-right: 1rem;">Confirma tu distancia</label>
+                <div>
+                    <div (click)="updateSelectedDistanceBackup(5)" class="button-distance small" [ngClass]="{'selected': pendingRegistration.data && pendingRegistration.data.distance === 5}">5K</div>
+                    <div (click)="updateSelectedDistanceBackup(10)"  class="button-distance small" [ngClass]="{'selected': pendingRegistration.data && pendingRegistration.data.distance === 10}">10K</div>
+                    <div (click)="updateSelectedDistanceBackup(21)"  class="button-distance small" [ngClass]="{'selected': pendingRegistration.data && pendingRegistration.data.distance === 21}">21K</div>
+
+                </div>
+                <button *ngIf="pendingRegistration.data.distance === undefined || (pendingRegistration.updating !== undefined && pendingRegistration.updating === true)" class="main-button" [disabled]="pendingRegistration.data.distance === undefined" (click)="updateExistingRegistry(pendingRegistration.data)">
+                  ACTUALIZAR
+                </button>
+            </div>
+            <div *ngIf="pendingRegistration.data && pendingRegistration.data.paymentStatus === 0" >
+                Si aun no has pagado, da click en el siguiente link.
+                <!-- <div *ngIf="pendingRegistration.data.distance === 5" style="margin: 1.2rem;"><a href="https://biz.payulatam.com/L0cd688D7B2ADC7" target="blank" style="bottom: 0;left: 0;margin: 0 auto;margin: 2rem;"><img style="margin: 0 auto;" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></div>
+                <div *ngIf="pendingRegistration.data.distance === 10" style="margin: 1.2rem;"><a href="https://biz.payulatam.com/L0cd688B16F3267" target="blank" style="bottom: 0;left: 0;margin: 0 auto;margin: 2rem;"><img style="margin: 0 auto;" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></div>
+                <div *ngIf="pendingRegistration.data.distance === 21" style="margin: 1.2rem;"><a href="https://biz.payulatam.com/L0cd688769F0699" target="blank" style="bottom: 0;left: 0;margin: 0 auto;margin: 2rem;"><img style="margin: 0 auto;" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></div> -->
+                <div *ngIf="pendingRegistration.data.registrationType === 2" style="margin: 1.2rem;"><a href="https://biz.payulatam.com/L0cd6885FE0F5E3" target="blank" style="bottom: 0;left: 0;margin: 0 auto;margin: 2rem;"><img style="margin: 0 auto;" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></div>
+                <div *ngIf="pendingRegistration.data.registrationType === 3" style="margin: 1.2rem;"><a href="https://biz.payulatam.com/L0cd6889632E2E2" target="blank" style="bottom: 0;left: 0;margin: 0 auto;margin: 2rem;"><img style="margin: 0 auto;" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></div>
+                <div *ngIf="pendingRegistration.data.registrationType === 4" style="margin: 1.2rem;"><a href="https://biz.payulatam.com/L0cd688F403A47F" target="blank" style="bottom: 0;left: 0;margin: 0 auto;margin: 2rem;"><img style="margin: 0 auto;" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></div>
+            </div>
+            <h1 style="font-size: 1rem;text-align: center;"> Hola, <span style="font-size: 1.2rem;color: white;">{{pendingRegistration.data.name}}</span><br><br> <span *ngIf="pendingRegistration.data.gender === 'M'" style="color: white;">{{pendingRegistration.data.registrationType === 1?'Registro Gratis':pendingRegistration.data.registrationType === 2?'Registro Gratis + Medalla Finisher':pendingRegistration.data.registrationType === 3?'Registro Gratis + Camisa Finisher' : pendingRegistration.data.registrationType === 4 ? 'Registro Gratis + Medalla + Camisa Finisher' : ''}}</span><span style="color: white;" *ngIf="pendingRegistration.data.gender === 'F'">{{pendingRegistration.data.registrationType === 1?'Registro Gratis':pendingRegistration.data.registrationType === 2?'Registro Gratis + Medalla Finisher':pendingRegistration.data.registrationType === 3?'Registro Gratis + Camisa Finisher' : pendingRegistration.data.registrationType === 4 ? 'Registro Gratis + Medalla + Camisa Finisher' : ''}}</span><br><br>Seras notificado via email cuando el pago haya sido procesado. <br><br> <span style="text-decoration: underline;color: white;font-size: 0.8rem;">El proceso de verificacion del pago toma de 24h a 36h.</span>
+
+              <img style="width: 60%;min-width: 280px;margin: 0 auto;" *ngIf="pendingRegistration.data.shirtOption === 0" src="../../../assets/images/camisa-oficial-corre-por-cucuta-negra.png">
+              <img style="width: 60%;min-width: 280px;margin: 0 auto;"  *ngIf="pendingRegistration.data.shirtOption === 1" src="../../../assets/images/camisa-oficial-corre-por-cucuta-azul.png">
+              <img style="width: 60%;min-width: 280px;margin: 0 auto;" *ngIf="pendingRegistration.data.shirtOption === 2" src="../../../assets/images/camisa-oficial-corre-por-cucuta-rosa.png">
+           </h1>
+
+           <div (click)="resetSignup()">
+             Nuevo registro
+           </div>
+        </div>
+      </div>
+      <div>
+        <div *ngIf="finishedRegistration === false && pendingRegistration.status === false && pendingRegistration.data === undefined">
+            <h1 style="font-size: 2rem;
+            height: max-content;
+            color: white;
+            width: max-content;
+            margin: 0 auto;
+            font-family: 'Fjalla';
+            max-width: 100%;
+            text-align: center;">Datos personales y de registro</h1>
+
+          <div class="column is-5" style="height: max-content;">
+              <label for="email" style="margin-right: 1rem;">Tipo de registro</label>
+
+              <div style="width: 100%;" >
+                  <div (click)="updateSelectedRegistration(1)" class="button-distance" [ngClass]="{'selected': newSignup && newSignup.registrationType === 1}">SOLO REGISTRO GRATIS</div>
+                  <div (click)="updateSelectedRegistration(2)" class="button-distance" [ngClass]="{'selected': newSignup && newSignup.registrationType === 2}">REGISTRO GRATIS + MEDALLA</div>
+                  <div (click)="updateSelectedRegistration(3)" class="button-distance" [ngClass]="{'selected': newSignup && newSignup.registrationType === 3}">REGISTRO GRATIS + CAMISA</div>
+                  <div (click)="updateSelectedRegistration(4)" class="button-distance" [ngClass]="{'selected': newSignup && newSignup.registrationType === 4}">REGISTRO GRATIS + CAMISA + MEDALLA</div>
+              </div>
+
+
+          </div>
+
+          <div class="column is-5">
+              <label for="email" style="margin-right: 1rem;">Tipo de Sangre</label>
+              <div  style="width: 100%;">
+                  <div (click)="updateSelectedBloodType('A+')" class="button-distance small"  [ngClass]="{'selected': newSignup && newSignup.bloodType === 'A+'}">A+</div>
+                  <div (click)="updateSelectedBloodType('A-')"  class="button-distance small"  [ngClass]="{'selected': newSignup && newSignup.bloodType === 'A-'}">A-</div>
+                  <div (click)="updateSelectedBloodType('B+')" class="button-distance small"  [ngClass]="{'selected': newSignup && newSignup.bloodType === 'B+'}">B+</div>
+                  <div (click)="updateSelectedBloodType('B-')"  class="button-distance small"  [ngClass]="{'selected': newSignup && newSignup.bloodType === 'B-'}">B-</div>
+                  <div (click)="updateSelectedBloodType('O+')" class="button-distance small"  [ngClass]="{'selected': newSignup && newSignup.bloodType === 'O+'}">O+</div>
+                  <div (click)="updateSelectedBloodType('O-')"  class="button-distance small"  [ngClass]="{'selected': newSignup && newSignup.bloodType === 'O-'}">O-</div>
+                  <div (click)="updateSelectedBloodType('AB+')" class="button-distance small"  [ngClass]="{'selected': newSignup && newSignup.bloodType === 'AB+'}">AB+</div>
+                  <div (click)="updateSelectedBloodType('AB-')"  class="button-distance small"  [ngClass]="{'selected': newSignup && newSignup.bloodType === 'AB-'}">AB-</div>
+              </div>
+          </div>
+          <div class="column is-5" style="width: max-content;">
+              <label for="email" style="margin-right: 1rem;">Soy</label>
+              <div style="width: 100%;">
+                  <div (click)="updateSelectedGender('M')" [ngClass]="{'selected': newSignup && newSignup.gender === 'M'}">HOMBRE</div>
+                  <div (click)="updateSelectedGender('F')"  [ngClass]="{'selected': newSignup && newSignup.gender === 'F'}">MUJER</div>
+              </div>
+          </div>
+          <div class="column is-5" style="width: max-content;">
+            <label for="email" style="margin-right: 1rem;">Distancia</label>
+            <div>
+                <div (click)="updateSelectedDistance(5)" class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.distance === 5}">5K</div>
+                <div (click)="updateSelectedDistance(10)"  class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.distance === 10}">10K</div>
+                <div (click)="updateSelectedDistance(21)"  class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.distance === 21}">21K</div>
+            </div>
+          </div>
+            <div *ngIf="newSignup && newSignup.registrationType !== undefined && (newSignup.registrationType === 3 || newSignup.registrationType === 4)" class="column is-5" style="width: max-content;">
+              <label for="email" style="margin-right: 1rem;">Talla</label>
+              <div>
+                  <div (click)="updateSelectedSize('S')" class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.size === 'S'}">S</div>
+                  <div (click)="updateSelectedSize('M')"  class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.size === 'M'}">M</div>
+                  <div (click)="updateSelectedSize('L')"  class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.size === 'L'}">L</div>
+                  <div (click)="updateSelectedSize('XL')"  class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.size === 'XL'}">XL</div>
+              </div>
+        </div>
+        <div *ngIf="newSignup && newSignup.registrationType !== undefined && (newSignup.registrationType === 2 || newSignup.registrationType === 3 || newSignup.registrationType === 4)" class="column is-5" style="width: max-content;">
+          <label for="address" style="margin-right: 1rem;">Dirección de entrega para tus compras</label>
+          <textarea name="address"  [(ngModel)]="newSignup.address"  placeholder="Calle 1 #1-10 Barrio Primero, Apartamento 4004, Cucuta" >
+          </textarea>
+      </div>
+      <div *ngIf="newSignup && newSignup.registrationType !== undefined" class="column is-5" style="width: max-content;">
+        <label for="city" style="margin-right: 1rem;">Ciudad y Pais</label>
+        <input name="city"  [(ngModel)]="newSignup.city"  placeholder="Cucuta, Colombia" >
+    </div>
+          <div *ngIf="newSignup && newSignup.registrationType !== undefined && (newSignup.registrationType === 3 || newSignup.registrationType === 4)" class="column is-5" style="width: max-content;">
+            <label for="email" style="margin-right: 1rem;">ESCOGE TU COLOR DE CAMISA</label>
+            <div>
+              <h2 style="font-family: 'Fjalla';">
+                Camisas de referencia
+              </h2>
+                <div class="shirt-container" (click)="updateSelectedShirt(0)" [ngClass]="{'selected': newSignup && newSignup.shirtOption === 0}"><img src="../../../assets/images/camisa-oficial-corre-por-cucuta-negra.png"></div>
+                <div class="shirt-container" (click)="updateSelectedShirt(1)" [ngClass]="{'selected': newSignup && newSignup.shirtOption === 1}"><img src="../../../assets/images/camisa-oficial-corre-por-cucuta-azul.png"></div>
+                <div class="shirt-container" (click)="updateSelectedShirt(2)" [ngClass]="{'selected': newSignup && newSignup.shirtOption === 2}"><img src="../../../assets/images/camisa-oficial-corre-por-cucuta-rosa.png"></div>
+            </div>
+        </div>
+              <div class="column is-5">
+                  <label for="cedula" >Documento de Identidad</label>
+                  <input name="cedula" type="number" placeholder="Numero de Cedula" [(ngModel)]="newSignup.identityDocument" >
+              </div>
+              <div class="column is-5">
+                  <label for="socialsecurity name">EPS o Seguro</label>
+                  <input name="socialsecurity" type="text"  [(ngModel)]="newSignup.eps"  placeholder="Tu EPS o seguro" >
+              </div>
+              <div class="column is-5 name">
+                  <label for="fullname" >Nombre y Apellido</label>
+                  <input name="fullname" type="text"  [(ngModel)]="newSignup.name"  placeholder="Tu nombre y apellido" >
+              </div>
+              <div class="column is-5 name">
+                  <label for="email" >Correo</label>
+                  <input name="email" type="email" placeholder="tucorreo@mail.com" [(ngModel)]="newSignup.email" >
+              </div>
+              <div class="column is-5 name">
+                  <label for="instagram" >Instagram</label>
+                  <input name="instagram" type="instagram" placeholder="@miinstagram" [(ngModel)]="newSignup.instagram" >
+              </div>
+              <div class="column is-5">
+                  <label for="phonenumber" style="margin-right: 1rem;">Número Celular</label>
+                  <input name="phonenumber" type="number" placeholder="Numero de Teléfono" [(ngModel)]="newSignup.phone_number" >
+              </div>
+
+            <!-- <div> -->
+                <!-- <div class="column is-5">
+                    <label for="email" style="margin-right: 1rem;">Distancia</label>
+                    <div>
+                        <div (click)="updateSelectedDistance(21)" class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.distance === 21}">21K</div>
+                        <div (click)="updateSelectedDistance(10)"  class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.distance === 10}">10K</div>
+                        <div (click)="updateSelectedDistance(5)"  class="button-distance small" [ngClass]="{'selected': newSignup && newSignup.distance === 5}">5K</div>
+                    </div>
+                </div> -->
+
+
+            <!-- </div> -->
+
+            <div>
+                <h1 style="font-size: 1.2rem;height: 1.4rem;color: white;width: max-content;margin: 0 auto;font-family: 'Fjalla';">Contacto de Emergencia</h1>
+                <div class="column is-5 name">
+                    <label for="emergency-name" >Nombre y apellido</label>
+                    <input name="emergency-name" type="text"  [(ngModel)]="newSignup.contact.name"  placeholder="Nombre y apellido de tu contacto" >
+                </div>
+                <div class="column is-5">
+                    <label for="emergency-phonenumber" style="margin-right: 1rem;">Número Celular</label>
+                    <input name="emergency-phonenumber" type="number" placeholder="Numero de Teléfono" [(ngModel)]="newSignup.contact.phone_number" >
+                </div>
+                <div class="column is-5 name">
+                    <label for="emergency-relation" >Relacion</label>
+                    <input name="emergency-relation" type="text"  [(ngModel)]="newSignup.contact.relation"  placeholder="Padre, madre, hermano, etc." >
+                </div>
+            </div>
+            <div >
+                <h2 class="terms-and-conditions" style="font-size: 0.8rem;"> <input type="checkbox"> Acepto los terminos y condiciones consignados en el <a href="../../../assets/REGLAMENTO CORRE POR CÚCUTA.pdf" target="blank"><span style="text-decoration: underline;color: white;">Reglamento de la carrera</span></a></h2>
+
+              <div class="registration-fee" *ngIf="newSignup && newSignup.registrationType">
+                <p>{{newSignup.registrationType === 1? 'GRATIS' : newSignup.registrationType === 2? '$ 30.000' : newSignup.registrationType === 3 ? '$ 50.000' : newSignup.registrationType === 4? '$ 55.000' : '' }}</p>
+              </div>
+                <h1 *ngIf="newSignup && newSignup.registrationType === 1" style="    font-size: 1rem;
+                padding: 0.25rem;
+                width: max-content;
+                color: white;
+                background: rgba(255, 255, 255, 0.185);
+                margin: 2rem auto;
+                padding: 2rem;
+                text-align: center;
+                border-radius: 5px;
+                box-shadow: 0 0 40px -10px #000;
+                border: 3px solid;
+                background: white;
+                font-family: 'Fjalla';
+                color: #e9414d;" (click)="readSignup(newSignup)">ENVIAR MIS DATOS</h1>
+
+                <h1 *ngIf="newSignup && newSignup.registrationType === 2" style="font-size: 1rem;padding: 0.25rem;width: 200px;color: white;background: rgba(255, 255, 255, 0.185);" [ngClass]="{'disabled':  newSignup.identityDocument === undefined || newSignup.bloodType === undefined || newSignup.eps === undefined || newSignup.size === undefined ||  newSignup.age === undefined ||  newSignup.gender === undefined ||  newSignup.distance === undefined ||  newSignup.email === undefined ||  newSignup.name === undefined}" (click)="readSignup(newSignup)">Haz click para pagar y registrarte<br><a href="https://biz.payulatam.com/L0cd6885FE0F5E3" target="blank" style="position: relative;bottom: 0;left: 0;"><img style="position: relative;width: 200px;" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></h1>
+                <h1 *ngIf="newSignup && newSignup.registrationType === 3" style="font-size: 1rem;padding: 0.25rem;width: 200px;color: white;background: rgba(255, 255, 255, 0.185);" [ngClass]="{'disabled':  newSignup.identityDocument === undefined || newSignup.bloodType === undefined || newSignup.eps === undefined || newSignup.size === undefined ||  newSignup.age === undefined ||  newSignup.gender === undefined ||  newSignup.distance === undefined ||  newSignup.email === undefined ||  newSignup.name === undefined}" (click)="readSignup(newSignup)">Haz click para pagar y registrarte<br><a href="https://biz.payulatam.com/L0cd6889632E2E2" target="blank" style="position: relative;bottom: 0;left: 0;"><img style="position: relative;width: 200px;" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></h1>
+                <h1 *ngIf="newSignup && newSignup.registrationType === 4" style="font-size: 1rem;padding: 0.25rem;width: 200px;color: white;background: rgba(255, 255, 255, 0.185);" [ngClass]="{'disabled':  newSignup.identityDocument === undefined || newSignup.bloodType === undefined || newSignup.eps === undefined || newSignup.size === undefined ||  newSignup.age === undefined ||  newSignup.gender === undefined ||  newSignup.distance === undefined ||  newSignup.email === undefined ||  newSignup.name === undefined}" (click)="readSignup(newSignup)">Haz click para pagar y registrarte<br><a href="https://biz.payulatam.com/L0cd688F403A47F" target="blank" style="position: relative;bottom: 0;left: 0;"><img style="position: relative;width: 200px;" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></h1>
+            </div>
+        </div>
+
+        <div *ngIf="finishedRegistration === true">
+            <h1 style="padding:0.4rem">Gracias por Registrarte. </h1>
+            <h1 style="font-size: 1rem;color: white;padding: 0.4rem;">Finaliza el proceso de pago en el link de PayU. El proceso de verificacion del pago toma de 24h a 36h</h1>
+            <h1 *ngIf="newSignup && newSignup.registrationType === 2" style="font-size: 1rem;padding: 0.25rem;width: 200px;color: white;background: rgba(255, 255, 255, 0.185);" [ngClass]="{'disabled':  newSignup.identityDocument === undefined || newSignup.bloodType === undefined || newSignup.eps === undefined || newSignup.size === undefined ||  newSignup.age === undefined ||  newSignup.gender === undefined ||  newSignup.distance === undefined ||  newSignup.email === undefined ||  newSignup.name === undefined}" (click)="readSignup(newSignup)"><a href="https://biz.payulatam.com/L0cd6885FE0F5E3" target="blank" style="position: absolute;bottom: 0;left: 0;"><img src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></h1>
+            <h1 *ngIf="newSignup && newSignup.registrationType === 3" style="font-size: 1rem;padding: 0.25rem;width: 200px;color: white;background: rgba(255, 255, 255, 0.185);" [ngClass]="{'disabled':  newSignup.identityDocument === undefined || newSignup.bloodType === undefined || newSignup.eps === undefined || newSignup.size === undefined ||  newSignup.age === undefined ||  newSignup.gender === undefined ||  newSignup.distance === undefined ||  newSignup.email === undefined ||  newSignup.name === undefined}" (click)="readSignup(newSignup)"><a href="https://biz.payulatam.com/L0cd6889632E2E2" target="blank" style="position: absolute;bottom: 0;left: 0;"><img src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></h1>
+            <h1 *ngIf="newSignup && newSignup.registrationType === 4" style="font-size: 1rem;padding: 0.25rem;width: 200px;color: white;background: rgba(255, 255, 255, 0.185);" [ngClass]="{'disabled':  newSignup.identityDocument === undefined || newSignup.bloodType === undefined || newSignup.eps === undefined || newSignup.size === undefined ||  newSignup.age === undefined ||  newSignup.gender === undefined ||  newSignup.distance === undefined ||  newSignup.email === undefined ||  newSignup.name === undefined}" (click)="readSignup(newSignup)"><a href="https://biz.payulatam.com/L0cd688F403A47F" target="blank" style="position: absolute;bottom: 0;left: 0;"><img src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"></a></h1>
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+<div class="loading-modal" *ngIf="loading === true">
+  <p style="font-family: 'Fjalla';">
+    CARGANDO
+  </p>
+  <img src="../../../assets/images/new-logo-try.png">
+
+</div>

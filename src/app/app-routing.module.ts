@@ -9,6 +9,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { VirtualRaceComponent } from './components/virtual-race/virtual-race.component';
 const routes: Routes = [
   {path: 'inicio', component: VirtualRaceComponent},
+  {path: 'patrocinadores', component: HomeComponent},
   {path: '', redirectTo: 'inicio', pathMatch: 'full'},
   {path: 'registro', component: RegistrationComponent},
   { path: 'acerca-de-la-carrera', component: SignupComponent,

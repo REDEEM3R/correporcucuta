@@ -40,7 +40,7 @@
 		left: 0px;
 		top: 5vh;
     }
-    
+
     #Path_2_n {
         opacity: 0.43;
     }
@@ -94,8 +94,28 @@
       }
     }
   }
-  
- 
 
-  
-  
+
+
+
+  .sponsor{
+    max-height: 500px;
+    height: 60vh;
+    & a{
+      width: 100%;
+      text-align: center;
+      font-family: "Fjalla";
+      font-size: 1rem !important;
+      color: black;
+      position: relative;
+      height: 100%;
+      padding: 2rem 0;
+      display: block;
+      & img{
+        position: relative!important;
+        display: block!important;
+        margin: 1rem auto!important;
+        width: 90%!important;
+      }
+    }
+  }

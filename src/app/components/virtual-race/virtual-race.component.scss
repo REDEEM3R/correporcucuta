@@ -1,3 +1,99 @@
+
+
+.charity-banner{
+  width: auto;
+  background: #2C2C2C;
+  height:max-content;
+  padding: 5rem 2rem;
+  & > p:first-of-type{
+    width: auto;
+    margin: 0 auto;
+    font-size: 1.4rem;
+    font-family: "Caviar Light";
+    text-align: center;
+    color: white;
+    min-height: 200px;
+  }
+  & > div:first-of-type{
+    text-align: center;
+    & > a > img{
+      height: 200px;
+    }
+    & > p{
+      padding: 2rem 0!important;
+      & > a{
+        color: white!important;
+        text-decoration: none;
+        font-family: 'Fjalla';
+      }
+      display: inline-block;
+      font-size: 2rem;
+      opacity: 1;
+      color: #2C2C2C;
+      transition: all linear 0.3s;
+      margin: 0 auto;
+      width: -webkit-max-content;
+      width: -moz-max-content;
+      width: 33.3333%;
+      margin: 0;
+      text-align: center;
+      height: -webkit-max-content;
+      height: -moz-max-content;
+      height: max-content;
+      vertical-align: middle;
+      padding: 0;
+      min-width: 300px;
+      font-size: 1.4rem;
+      color: white!important;
+      & b{
+        margin: 1rem;
+        font-family: "Fjalla";
+      }
+    }
+    width: auto !important;
+    background-color: #2C2C2C;
+    margin-bottom: 5rem !important;
+    padding: 35px !important;
+    border-radius: 20px !important;
+    box-shadow: #7d7d7d 0 0 30px -15px !important;
+    color: #7d7d7d;
+    transition: all linear 0.3s;
+    min-height: 200px;
+
+    background-color: rgb(77, 77, 77)!important;
+      & > p:hover {
+        background-color: rgba(255, 255, 255, 0.274);
+        color: #2C2C2C!important;
+        & a{
+          transition: all linear 0.15s;
+            &:hover{
+              text-decoration: underline;
+            color: #2C2C2C!important;
+          }
+        }
+      }
+
+
+  }
+}
+.shirts-banner{
+  width: 100%;
+  padding: 10vh 0;
+  background: white;
+  &  > div > img{
+    width: 33.333%;
+    margin: 2rem 0;
+    display: inline-block;
+  }
+  & > div{
+    width: 80%;
+    min-width: 300px;
+    margin: 0 auto;
+    & > img:hover{
+
+    }
+  }
+}
 .banner{
     position: relative;
     min-width: 900px;
@@ -14,8 +110,9 @@
         background: rgb(229,0,0);
         background: radial-gradient(circle, rgba(229,0,0,1) 37%, rgba(173,0,0,1) 87%, rgba(132,0,0,1) 98%);
     }
-    &.paralax{
+    &.transparent{
         background: transparent!important;
+        padding: 0!important;
     }
     &.white{
         background: white;
@@ -54,6 +151,15 @@
                 width: 70vw;
                 max-width: 450px;
             }
+            & > img:nth-child(4){
+              position: relative!important;
+              bottom: 0px!important;
+              width: 120vw!important;
+              margin: 0 auto!important;
+              text-align: center!important;
+              margin-top: 8rem!important;
+              left: -20vw!important;
+            }
         }
         &.red-circle{
             background: transparent!important;
@@ -87,7 +193,7 @@
             background: linear-gradient(270deg, rgba(248,219,0,1) 50%, rgba(217,196,0,1) 100%);
             & > img:nth-child(2){
                 position: relative!important;
-                
+
             }
         }
         &.red-circle{
@@ -137,11 +243,17 @@
         left: 22.5vw;
     }
 }
-.benefit{
-    position: relative!important;
-    right: unset;
-    right: unset!important;
-    margin: 10vh 3rem;
+img.benefit{
+  position: absolute;
+  right: 10vw;
+  width: 33%!important;
+  position: relative!important;
+  max-width: 260px;
+  margin: 0%;
+  display: inline-block;
+  margin: 8rem 2%;
+  width: 29.333%!important;
+  right: unset!important;
 }
 .subscription-option{
     display: inline;
@@ -178,7 +290,7 @@
                 transition: all ease-in-out 100ms;
                 content: '';
                 opacity: 0;
-                
+
                 font-size: 2rem;
             }
 
@@ -192,10 +304,10 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                
+
                 font-size: 2rem;
             }
-            
+
         }
     }
     & > div:nth-child(1) > h1:hover::before{
@@ -242,20 +354,63 @@
             }
 }
 #free-registry{
-    position: relative !important;
-    width: 40vw !important;
-    margin: 0 auto !important;
-    right: unset !important;
-    float: unset;
-    margin-right: 0 !important;
-    max-width: 330px !important;
-    margin-right: 0;
-    top: 51px;
-    vertical-align: top;
-    margin-left: 3rem !important;
-    top: 2rem!important;
+  position: relative !important;
+  width: 40vw !important;
+  margin: 0 auto !important;
+  right: unset !important;
+  float: unset;
+  margin-right: 0 !important;
+  max-width: 330px !important;
+  margin-right: 0;
+  top: 51px;
+  vertical-align: top;
+  margin-left: 0rem !important;
+  top: 2rem !important;
+  margin: unset!important;
+  right: 0!important;
+  float: right;
+  left: unset!important;
 }
-@media screen and (min-width : 1000px){
+
+.subscription-option{
+  min-width: unset !important;
+  width: 33% !important;
+  max-width: 30%;
+  position: relative;
+  display: inline-block !important;
+  margin: 1% !important;
+  border-radius: 10px;
+  background: #0000002b;
+  & > *{
+    transition: linear 0.3s all;
+  }
+  &:hover{
+    cursor: default;
+  }
+  &>p{
+    text-align: center!important;
+  }
+  &:hover > p{
+    // text-shadow: 0 0 4px black;
+    color: #2C2C2C;
+  }
+  &:hover > div {
+    background-color: #c03229!important;
+    color: white;
+  }
+
+}
+@media screen and (min-width : 600px){
+  .signup-link-button{
+    width: max-content;
+    min-width: 200px;
+    text-align: center;
+    transition: all linear 0.3s;
+    &:hover{
+      box-shadow: 0 0 20px -5px black!important;
+    }
+
+  }
     .virtual-logo{
         position: absolute !important;
         float: left;
@@ -276,19 +431,20 @@
         }
     }
     .charity-cause{
-        position: relative !important;
-        margin: 0 !important;
-        right: unset !important;
-        margin: 0 auto !important;
-        display: block !important;
-        z-index: 2;
-        left: 0;
-        float: left;
-        top: -1rem;
-        width: 100px;
-        left: 7vw;
+      position: relative !important;
+      margin: 0 !important;
+      right: unset !important;
+      margin: 0 auto !important;
+      display: inline-block !important;
+      z-index: 1;
+      left: 0;
+      float: right;
+      top: 4rem;
+      width: 200px;
+      right: 0!important;
+      position: relative!important;
     }
-  .banner{  
+  .banner{
     position: relative;
     min-width: 900px;
     &.red{
@@ -359,24 +515,31 @@
         }
         &.white{
             background: white;
+            position: relative;
+            height: max-content;
+            min-height: 1000px;
+            overflow: hidden;
+            max-width: 90% !important;
+            margin: 0 auto;
+            padding: 2rem 0;
             & p{
                 float: right;
                 font-family: 'Fjalla';
                 font-size: 4rem;
                 color: #2C2C2C;
-                margin-right: 0!important; 
+                margin-right: 0!important;
                 width: 100%;
                 text-align: center!important;
             }
             & ul{
                 width: 94vw!important;
-                max-width: 500px!important;
+                max-width: unset!important;
                 font-family: 'Fjalla'!important;
                 padding-left: 0!important;
                 & li{
                     font-size: 1.4rem;
                     width: 80%;
-                    font-size: 1.2rem!important;
+                    font-size: 1.6rem!important;
                     width: 90%!important;
                     margin: 0 auto!important;
                 }
@@ -407,7 +570,7 @@
             background: linear-gradient(270deg, rgba(248,219,0,1) 50%, rgba(217,196,0,1) 100%);
             & > img:nth-child(2){
                 position: relative!important;
-                
+
             }
         }
         &.red-circle{
@@ -439,7 +602,7 @@
             height: 100vh;
             min-height: unset!important;
             overflow: hidden;
-            
+
             max-width: unset!important;
         }
         &.red{
@@ -449,7 +612,7 @@
             padding-top: 4rem;
             background: rgb(248,219,0);
             background: linear-gradient(270deg, rgba(248,219,0,1) 50%, rgba(217,196,0,1) 100%);
-            
+
         }
         &.red-circle{
             background: rgb(229,0,0);
@@ -537,7 +700,7 @@
         height: 100vh;
         min-height: unset!important;
         overflow: hidden;
-        
+
         max-width: unset!important;
         &.red{
             background: transparent!important;
@@ -610,7 +773,7 @@
             right: 10vw;
         }
     }
-    
+
     .virtual-logo{
         position: absolute!important;
         float: left;
@@ -629,6 +792,17 @@
 }
 
 @media screen and (max-width: 450px){
+  .shirts-banner{
+    width: 100%;
+    padding: 10vh 0;
+    background: white;
+    &  > div > img{
+      margin: 0 auto!important;
+      display: block!important;
+      width: 100%!important;
+      text-align: center;
+    }
+  }
     .paragraf{
         position: relative !important;
         top: 50px !important;
@@ -670,7 +844,7 @@
         &.red{
             background: rgb(191,0,0);
             background: linear-gradient(270deg, rgba(191,0,0,1) 81%, rgba(136,0,0,1) 100%);
-            & > img:nth-child(4){
+            & > img:nth-child(3){
                 top: 20vh;
                 margin-bottom: 10vh;
                 margin-right: 20px;
@@ -682,7 +856,7 @@
                 float: left;
                 top: 0;
                 position: absolute;
-            
+
             }
         }
         &.white{
@@ -705,7 +879,7 @@
                 margin: 0 auto!important;
             }
         }
-        
+
     }
    .banner>.half-height-container.paralax{
         & > img{
@@ -743,19 +917,22 @@
     }
     .virtual-logo{
         &.date{
-            position: relative !important;
-            bottom: 0;
-            min-width: 190px;
-            left: unset;
-            margin: 0 auto !important;
-            margin-top: 20px;
-            display: block;
-            margin: 0 auto;
-            text-align: center;
-            top: unset;
-            width: 50vw;
-            right: 0!important;
-            margin-right: 0rem!important;
+          position: relative !important;
+          bottom: 0;
+          min-width: 190px;
+          left: unset;
+          margin: 0 auto !important;
+          margin-top: 20px;
+          display: block;
+          margin: 0 auto;
+          text-align: center;
+          top: unset;
+          width: 50vw;
+          right: unset!important;
+          left: 1rem;
+          margin-right: 0rem !important;
+          float: left;
+          margin-left: 2rem;
         }
     }
     .benefit{
@@ -771,11 +948,13 @@
         font-size: 2rem !important;
     }
     .subscription-option{
-        width: 90%!important;
-    min-width: 400px!important;
-    min-width: unset!important;
-    display: block;
-    margin: 0 auto; 
+      width: 90% !important;
+      min-width: unset!important;
+      min-width: 90%;
+      display: block!important;
+      margin: 0 auto!important;
+      max-width: unset;
+      padding-top: 2rem;
         & > p{
             font-family: 'Fjalla';
             text-align: center !important;
@@ -797,5 +976,87 @@
                 background: white!important;
             }
         }
+    }
+    img.benefit{
+      width: 80%!important;
+      margin: 2rem auto!important;
+      max-width: unset!important;
+      min-width: unset!important;
+      max-width: 300px!important;
+    }
+    .charity-banner{
+      width: auto;
+      background: black;
+      height:max-content;
+      padding: 6rem 2rem;
+      & > p:first-of-type{
+        width: auto;
+        margin: 0 auto;
+        font-size: 1.4rem;
+        font-family: "Caviar Light";
+        text-align: center;
+        color: white;
+      }
+      & > div:first-of-type{
+        & > a > img{
+
+          background: #2c2c2c!important;
+          height: 200px;
+
+          box-shadow: 0 0 20px 0 black;
+        }
+        & > p{
+          & a{
+            display: block;
+          }
+          display: block;
+    font-size: 1rem;
+    opacity: 1;
+    color: white;
+    transition: all linear 0.3s;
+    margin: 0 auto;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    margin: 0 auto;
+    text-align: center;
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+    max-width: 100%;
+    padding: 3rem 0;
+    min-width: unset;
+    margin: 0 auto;
+    text-align: center;
+    width: max-content;
+          & span{
+            margin: 1rem;
+            font-family: "Fjalla";
+          }
+        }
+        width: auto !important;
+        background-color: #2C2C2C;
+        margin-bottom: 5rem !important;
+        padding: 35px !important;
+        border-radius: 20px !important;
+        box-shadow: none!important;
+        color: white;
+        transition: all linear 0.3s;
+        min-height: 200px;
+        background-color: black;
+        border: 10px solid white;
+        &:hover{
+          & > p {
+            display: block;
+            opacity: 1;
+          }
+          &>a>img{
+            margin: 0 auto;
+            display: block!important;
+            box-shadow: 0 0 20px 0 black;
+          }
+        }
+
+      }
     }
 }

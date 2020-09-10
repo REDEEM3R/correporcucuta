@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   @HostListener('window:scroll', ['$event'])
   onWindowScroll($event) {
     console.log(window.pageYOffset);
-    this.topPosition = window.pageYOffset; 
+    this.topPosition = window.pageYOffset;
   }
 
   ngOnInit() {
@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit {
       size: this.newSignup.size,
       eps: this.newSignup.eps,
       bloodType: this.newSignup.bloodType,
-      
+
       identity_document: this.newSignup.identity_document,
       registrationDate: Date.now(),
     });
@@ -84,13 +84,41 @@ export class HomeComponent implements OnInit {
 
   public getRunners(){
     let runners = [];
-    firestore().collection('liveRegistrations').get({}).then(_ => {
+    firestore().collection('virtualRegistrations').get({}).then(_ => {
       if(_.docs.length > 0){
         _.docs.map(doc => {
           this.databaseResults = _.docs.length;
           let runner = doc.data({});
+          runner.address = '';
           runner.actualDate = new Date(runner.registrationDate);
-          runner.actualDate = runner.actualDate.toString() 
+          runner.actualDate = runner.actualDate.toString();
+
+          switch (runner.registrationType) {
+            case 1:
+              runner.registrationType = 'GRATIS';
+              runner.size = 'no aplica';
+              runner.shirtOption = 'no aplica';
+              break;
+              case 2:
+              runner.registrationType = 'MEDALLA';
+              runner.size = 'no aplica';
+              runner.shirtOption = 'no aplica';
+              break;
+              case 3:
+              runner.registrationType = 'CAMISA';
+              // tslint:disable-next-line:max-line-length
+              runner.shirtOption = runner.shirtOption === 0 ? 'CAMISA NEGRA' : runner.shirtOption === 1 ? 'CAMISA AZUL' : runner.shirtOption === 2 ? 'CAMISA ROSADA' : '';
+              break;
+              case 4:
+              runner.registrationType = 'CAMISA + MEDALLA';
+              // tslint:disable-next-line:max-line-length
+              runner.shirtOption = runner.shirtOption === 0 ? 'CAMISA NEGRA' : runner.shirtOption === 1 ? 'CAMISA AZUL' : runner.shirtOption === 2 ? 'CAMISA ROSADA' : '';
+              break;
+
+            default:
+              break;
+          }
+
           runners.push(runner);
           if(runners.length === _.docs.length){
             this.runners = runners;
@@ -103,9 +131,9 @@ export class HomeComponent implements OnInit {
   }
 
 
-  downloadFile(data, filename='dataLive. 3.11.20 14:28') {
+  downloadFile(data, filename='REGISTROS AGOSTO 28 - CORRE X CUCUTA VIRTUAL') {
       if(this.databaseResults === this.runners.length){
-        let csvData = this.ConvertToCSV(this.runners, ['name','age', 'email', 'distance', 'gender', 'size', 'bloodType', 'eps', 'registrationDate', 'identity_document', 'phone_number', 'actualDate']);
+        let csvData = this.ConvertToCSV(this.runners, ['address','bloodType', 'email','eps','gender','identityDocument','instagram', 'name', 'paymentStatus', 'phoneNumber', 'registrationType', 'shirtOption', 'size', 'actualDate','payuReference']);
         // console.log(csvData)
         let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
         let dwldLink = document.createElement("a");
@@ -120,7 +148,7 @@ export class HomeComponent implements OnInit {
         document.body.appendChild(dwldLink);
         dwldLink.click();
         document.body.removeChild(dwldLink);
-      }      
+      }
 }
 
 ConvertToCSV(objArray, headerList) {
