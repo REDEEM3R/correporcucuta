@@ -8,13 +8,17 @@ import { SignupModule } from './components/signup/signup.module';
 import { FormsModule } from '@angular/forms';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { VirtualRaceComponent } from './components/virtual-race/virtual-race.component';
+import { TemporaryComponent } from './components/temporary/temporary.component';
+import { RaceDayComponent } from './components/race-day/race-day.component';
 // import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     RegistrationComponent,
-    VirtualRaceComponent  ],
+    VirtualRaceComponent,
+    TemporaryComponent,
+    RaceDayComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

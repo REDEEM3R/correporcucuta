@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "cucuta-running"
+    }
+  },
+  "defaultProject": "cucuta-running",
+  "cli": {
+    "analytics": "1f5cd466-f9a9-44b0-8855-2c880946754b"
+  }
 }

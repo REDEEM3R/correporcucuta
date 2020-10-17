@@ -89,7 +89,16 @@ export class HomeComponent implements OnInit {
         _.docs.map(doc => {
           this.databaseResults = _.docs.length;
           let runner = doc.data({});
-          runner.address = '';
+
+          runner.city = runner.city !== null && runner.city !== undefined ? runner.city.toString().replace(/\s/g, "...."): null;
+          runner.city = runner.city !== null && runner.city !== undefined ? runner.city.toString().replace(/(\r\n|\n|\r)/gm, "...."): null;
+          runner.city = runner.city !== null && runner.city !== undefined ? runner.city.toString().replace(/,/g, '', "....") : null; 
+
+          runner.address = runner.address !== null ? runner.address.toString().replace(/\s/g, "...."): null;
+          runner.address = runner.address !== null ? runner.address.toString().replace(/(\r\n|\n|\r)/gm, "...."): null;
+
+          runner.address = runner.address !== null ? runner.address.toString().replace(/,/g, '', "...."): null;
+         
           runner.actualDate = new Date(runner.registrationDate);
           runner.actualDate = runner.actualDate.toString();
 
@@ -133,7 +142,7 @@ export class HomeComponent implements OnInit {
 
   downloadFile(data, filename='REGISTROS AGOSTO 28 - CORRE X CUCUTA VIRTUAL') {
       if(this.databaseResults === this.runners.length){
-        let csvData = this.ConvertToCSV(this.runners, ['address','bloodType', 'email','eps','gender','identityDocument','instagram', 'name', 'paymentStatus', 'phoneNumber', 'registrationType', 'shirtOption', 'size', 'actualDate','payuReference']);
+        let csvData = this.ConvertToCSV(this.runners, ['city','address','bloodType', 'email','eps','gender','identityDocument','instagram', 'name', 'paymentStatus', 'phoneNumber', 'registrationType', 'shirtOption', 'size', 'actualDate','payuReference']);
         // console.log(csvData)
         let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
         let dwldLink = document.createElement("a");

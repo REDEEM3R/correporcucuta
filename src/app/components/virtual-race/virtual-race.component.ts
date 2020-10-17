@@ -27,4 +27,8 @@ export class VirtualRaceComponent implements OnInit {
         break;
     }
   }
+
+  public navigateTo(url){
+    window.location.href = url;
+  }
 }

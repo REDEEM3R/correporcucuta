@@ -1,5 +1,10 @@
 
 <!-- BANNER SUPERIOR - PRESENTACION LOGO VIRTUAL -->
+
+<div class="banner green">
+    <img (click)="navigateTo('https://www.strava.com/clubs/correporcucuta-707489')" src="../../../assets/images/CLUB-STRAVA.png">
+    <img (click)="navigateTo('https://www.instagram.com/pedaleaporcucuta')" src="../../../assets/images/PEDALEAPORCUCUTAANUNCIO.png">
+</div>
 <div class="banner red">
     <div class="full-height-container red">
         <!-- <img class="charity-cause" src="../../../assets/images/fundacion-cancer-de-ninos.png"> -->
@@ -58,16 +63,18 @@ Esto es un evento sin ánimo de lucro. La donación será realizada en nombre de
 
 <div class="banner red-circle">
     <div class="full-height-container red-circle">
-        <img src="../../../assets/images/tres-opciones.png" style="  position: relative;left: 10%;margin-top: 5%;width: 80vw;max-width: 600px;display:block;">
-        <div class="subscription-option" style="width: 40%;min-width: 400px;">
+       <div class="last-chance" style="text-align: center;width: 100%;max-width: 400px;padding: 1rem 2rem;margin: 0 auto;font-size: 2rem;color: white;font-family: 'Fjalla';">
+           ULTIMA OPORTUNIDAD - HASTA EL 30 DE SEPTIEMBRE
+       </div>
+        <div class="subscription-option" style="width: 100%;min-width: 400px;">
 
-            <p style="font-family: 'Fjalla';text-align: right;font-size: 1.6rem;">OPCION 1</p>
+            <p style="font-family: 'Fjalla';text-align: right;font-size: 1.6rem;">VENTA FINAL - FULL KIT</p>
             <div style="background-color: white;">
-                <h1 style="padding: 2rem 1rem;text-align: right;font-size: 1.2rem;font-family: 'Fjalla'">MEDALLA FINISHER CORRE POR CUCUTA VIRTUAL</h1>
-                <h2 style="padding: 2rem 1rem;text-align: right;font-size: 1.2rem;font-family: 'Fjalla'; background: red;">$ 30.000</h2>
+                <h1 style="padding: 2rem 1rem;text-align: right;font-size: 1.2rem;font-family: 'Fjalla'">REGISTRO + CAMISA FINISHER + MEDALLA FINISHER + OBSEQUIO</h1>
+                <h2 style="padding: 2rem 1rem;text-align: right;font-size: 2rem;font-family: 'Fjalla';">$ 65.000</h2>
             </div>
         </div>
-        <div class="subscription-option" style="width: 40%;min-width: 400px;">
+        <!-- <div class="subscription-option" style="width: 40%;min-width: 400px;">
 
             <p style="font-family: 'Fjalla';text-align: right;font-size: 1.6rem;">OPCION 2</p>
             <div style="background-color: white;">
@@ -82,11 +89,15 @@ Esto es un evento sin ánimo de lucro. La donación será realizada en nombre de
                 <h1 style="padding: 2rem 1rem;text-align: right;font-size: 1.2rem;font-family: 'Fjalla'">CAMISA FINISHER + MEDALLA FINISHER + OBSEQUIO</h1>
                 <h2 style="padding: 2rem 1rem;text-align: right;font-size: 1.2rem;font-family: 'Fjalla'; background: red;">$ 55.000</h2>
             </div>
-        </div>
+        </div> -->
         <p class="benefit" style="margin:0 auto;text-align:center;margin-top: 4rem!important;margin-bottom: 0!important;font-family:'Fjalla';font-size: 4rem;">CON TU REGISTRO GRATIS RECIBIRAS</p>
-        <img class="benefit"  src="../../../assets/images/certificado-finisher.png">
-        <img class="benefit"  src="../../../assets/images/etiqueta-numero.png">
-        <img class="benefit" src="../../../assets/images/descuento-correporcucuta.png">
+       
+        <div style="width: max-content;margin:0 auto;display: block;">
+            <img class="benefit"  src="../../../assets/images/certificado-finisher.png">
+            <img class="benefit"  src="../../../assets/images/etiqueta-numero.png">
+            <img class="benefit" src="../../../assets/images/descuento-correporcucuta.png">
+        </div>
+       
 
         <!-- <img src="../../../assets/images/free-for-all.png" style="    position: relative;bottom: 0px;width: 115vw;margin: 0 auto;text-align: center;margin-top:8rem;"> -->
     </div>
@@ -231,7 +242,7 @@ min-height: 1080px;">
     border: 7px solid #1d1e1e;cursor: pointer;" (click)="scrollTo(0)">
         <img style="border-radius: 500px;width: 90%;margin: 0.4rem auto;display: block;" src="../../../assets/images/mini-shirt.png">
     </div>
-    <div class="camisa" style="    width: max-content;
+    <!-- <div class="camisa" style="    width: max-content;
     height: max-content;
     padding: 1rem 1.4rem;
     background-color: black;
@@ -249,5 +260,5 @@ min-height: 1080px;">
     border-radius: 10px;
     bottom: 20px;cursor: pointer;" (click)="navigateToRegistration()">
     QUIERO CORRER
-    </div>
+    </div> -->
 </div>

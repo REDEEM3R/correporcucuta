@@ -7,11 +7,16 @@ import { Run10kComponent } from './components/signup/run10k/run10k.component';
 import { Run21kComponent } from './components/signup/run21k/run21k.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { VirtualRaceComponent } from './components/virtual-race/virtual-race.component';
+import { TemporaryComponent } from './components/temporary/temporary.component';
+import { RaceDayComponent } from './components/race-day/race-day.component';
 const routes: Routes = [
   {path: 'inicio', component: VirtualRaceComponent},
   {path: 'patrocinadores', component: HomeComponent},
   {path: '', redirectTo: 'inicio', pathMatch: 'full'},
-  {path: 'registro', component: RegistrationComponent},
+  // {path: 'registro', component: RegistrationComponent},
+  {path: 'casi-listos', component: TemporaryComponent},
+  {path: 'carrera', component: RaceDayComponent},
+  {path: 'carrera/:section', component: RaceDayComponent},
   { path: 'acerca-de-la-carrera', component: SignupComponent,
   },
   { path: 'acerca-de-la-carrera', component: SignupComponent,

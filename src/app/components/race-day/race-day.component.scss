@@ -1,0 +1,92 @@
+.main-race-background{
+    background: rgb(243,0,112);
+    background: linear-gradient(270deg, rgba(243,0,112,1) 0%, rgba(192,0,88,1) 70%, rgba(122,0,56,1) 100%);
+    min-height: 100vh;
+    height: max-content;
+    width: 100vw;
+    top: 0;
+    position: relative;
+    padding-top: 90px;
+    clear: both;
+    min-width: 1000px;
+    & > div{
+        width: auto;
+        display: inline-block;
+        margin: 0;
+        height: 100vh;
+        background-color: transparent;
+        overflow: hidden;
+        &:nth-child(1){
+            width: 70%;
+            float: left;
+            top: 0;
+            padding-top: 0;
+            height: 100%;
+            position: relative;
+        }
+        &:nth-child(2){
+            position: fixed;
+            width: 30%;
+            float: right;
+            background-color: #272727;
+            top: 0;
+            padding-top: 90px;
+            min-width: 330px;
+            z-index: 300000000;
+            & > div > *{
+                width: 100%;
+                position: relative;
+                margin: 0 auto;
+                text-align: center;
+                & > img{
+                    width: 80%;
+                    max-width: 140px;
+                    margin: 0 auto;
+                }
+                & > p{
+                   font-family: "Fjalla";
+                   color: white;
+                   margin: 0 auto;
+                   width: 80%;
+                   font-size: 1.2rem;
+                }
+                
+            }
+            & > div > img{
+                width: 80%;
+                max-width: 300px;
+                display: block;
+                margin: 0 auto;
+            }
+        }
+    }
+}
+
+.kids-background{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.credits-and-thanks{
+    width: max-content;
+    max-width: 400px;
+    font-size: 2.4rem;
+    color: white;
+    font-family: 'Fjalla';
+    margin-left: 2rem;
+}
+
+.race-section-1{
+    
+        position: relative;
+        & .logo{
+            position: absolute;
+            right: 0;
+            top: 0;
+            max-width: 200px;
+            margin-top: 2rem;
+            margin-right: 2rem;
+        }
+}
