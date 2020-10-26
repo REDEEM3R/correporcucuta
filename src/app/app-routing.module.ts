@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'inicio', component: VirtualRaceComponent},
   {path: 'patrocinadores', component: HomeComponent},
   {path: '', redirectTo: 'inicio', pathMatch: 'full'},
-  // {path: 'registro', component: RegistrationComponent},
+  {path: 'registro', component: RegistrationComponent},
   {path: 'casi-listos', component: TemporaryComponent},
   {path: 'carrera', component: RaceDayComponent},
   {path: 'carrera/:section', component: RaceDayComponent},

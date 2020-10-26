@@ -18,20 +18,23 @@
         overflow: hidden;
         &:nth-child(1){
             width: 70%;
-            float: left;
-            top: 0;
-            padding-top: 0;
-            height: 100%;
-            position: relative;
+    float: left;
+    top: 0;
+    padding-top: 0;
+    height: max-content;
+    position: relative;
+    display: block;
+    float: unset;
         }
         &:nth-child(2){
             position: fixed;
-            width: 30%;
+            width: 25%;
             float: right;
             background-color: #272727;
             top: 0;
+            height: 100vh;
+            right: 0;
             padding-top: 90px;
-            min-width: 330px;
             z-index: 300000000;
             & > div > *{
                 width: 100%;
@@ -43,13 +46,7 @@
                     max-width: 140px;
                     margin: 0 auto;
                 }
-                & > p{
-                   font-family: "Fjalla";
-                   color: white;
-                   margin: 0 auto;
-                   width: 80%;
-                   font-size: 1.2rem;
-                }
+                color: white;
                 
             }
             & > div > img{
@@ -58,15 +55,33 @@
                 display: block;
                 margin: 0 auto;
             }
+            & > div > .links{
+                width: 80%;
+                & > a{
+                    font-size: 1rem;
+                    font-family: 'Fjalla';
+                    & > p{
+                        font-family: "Fjalla";
+                        width: max-content;
+                        font-size: 1rem;
+                        display: block;
+                        margin: 2px auto;
+                        max-width: 80%;
+                        text-align: center;
+                    }
+                }
+            }
         }
     }
 }
 
 .kids-background{
     position: fixed;
-    top: 0;
+    bottom: -150px;
     left: 0;
     z-index: 1;
+    width: 80%;
+    mix-blend-mode: lighten;
 }
 
 .credits-and-thanks{
@@ -76,6 +91,7 @@
     color: white;
     font-family: 'Fjalla';
     margin-left: 2rem;
+    margin-top: 1rem!important;
 }
 
 .race-section-1{
@@ -89,4 +105,517 @@
             margin-top: 2rem;
             margin-right: 2rem;
         }
+}
+.find-my-registration{
+    float: right;
+    
+    width: max-content;
+    max-width: 300px;
+    margin-right: 2rem;
+    height: max-content;
+    padding: 3rem 0;
+    padding-top: 0;
+    & > *{
+        float: right;
+        display: block;
+        margin: 0;
+        text-align: right;
+
+    }
+    & > label{
+        color: white;
+        font-family: 'Fjalla';
+        font-size: 1.4rem;
+    }
+    &>input{
+        margin: 0.8rem 0;
+        font-size: 1.2rem;
+        font-family: 'Fjalla';
+        padding: 20px;
+        width: max-content;
+        &::placeholder{
+            width: max-content;
+            font-size: 1.2rem;
+            font-family: 'Fjalla';
+        }
+    }
+}
+.pink-button{
+    background-color: #FF0066;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    padding: 1rem;
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+    cursor: pointer;
+    color: white;
+    font-size: 2rem;
+    z-index: 20000000000;
+    font-family: "Fjalla";
+    box-shadow: 0 0 10px -5px #520021;
+    position: relative;
+    &:hover{
+        text-decoration: underline;
+    box-shadow: 0 0 10px -3px #520021;
+    }
+}
+
+.blue-button{
+    background-color: #005fcc;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    padding: 1rem;
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+    cursor: pointer;
+    color: white;
+    font-size: 2rem;
+    z-index: 20000000000;
+    font-family: "Fjalla";
+    box-shadow: 0 0 10px -5px #050052;
+    position: relative;
+    &:hover{
+        text-decoration: underline;
+    box-shadow: 0 0 10px -3px #010052;
+    }
+}
+
+.loading-modal{
+    position: fixed;
+    top: 90px;
+    width: 100vw;
+    background-color: white;
+    height: 100vh;
+    padding-top: 10rem;
+    z-index: 3000000000000000000000;
+    &>p{
+      margin-top: 200px;
+      font-size: 4rem;
+      width: max-content;
+      margin:1rem auto;
+      display: block;
+  
+    }
+    &>img{
+      width: 50vw;
+      min-width: 200px;
+      margin: 0 auto;
+      display: block;
+    }
+  }
+  
+  .name-header{
+    font-size: 2rem;
+    color: white;
+    font-family: "Fjalla";
+    margin-top: 2rem;
+    margin-left: 2rem;
+  }
+  .white-label{
+
+    color: white;
+    font-family: 'Fjalla';
+    margin-left: 1.6rem;
+    &.big{
+        font-size: 2rem;
+    }
+    &.medium{
+        font-size: 1.4rem;
+        margin-bottom: 14px;
+    }
+  }
+  .race-information{
+    width: 100%;
+    padding: 40px;
+    padding-bottom: 0px;
+    z-index: 10000000000;
+    position: relative;
+      & > *{
+        & > *{
+            font-family: 'Fjalla';
+
+        }
+        font-family: 'Fjalla';
+        
+      }
+      & label{
+        display: inline-block;
+        width: 50%;
+        color: white;
+        font-size: 1.2rem;
+      }
+      & p{
+        display: inline-block;
+        width: 50%;
+      }
+  }
+  .time-chart{
+      &:hover{
+          background-color: white;
+          color: #FF0066!important;
+      }
+  }
+  .time-container{
+      padding: 0 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      & > *{
+          display: inline-block;
+          width: max-content!important;
+      }
+      & > input{
+          width: 40px!important;
+          padding: 10px;
+          color: black;
+          margin: 1rem;
+          font-family: 'Fjalla';
+      }
+  }
+  .your-top-position{
+    width: max-content;
+    padding: 1rem;
+    border-bottom: 3px solid white;
+    color: white;
+    text-align: center;
+    right: 0;
+    top: 0;
+    margin: 0 auto;
+      font-family: 'Fjalla';
+  }
+
+  @media screen and (max-width: 500px){
+    .main-race-background{
+        background: rgb(243,0,112);
+        background: linear-gradient(270deg, rgba(243,0,112,1) 0%, rgba(192,0,88,1) 70%, rgba(122,0,56,1) 100%);
+        min-height: 100vh;
+        height: max-content;
+        width: 100vw;
+        top: 0;
+        position: relative;
+        padding-top: 90px;
+        clear: both;
+        min-width: unset;
+        & > div{
+            width: auto;
+            display: inline-block;
+            margin: 0;
+            height: 100vh;
+            background-color: transparent;
+            overflow: hidden;
+            &:nth-child(1){
+                width: 100%;
+                float: unset;
+                top: 0;
+                padding-top: 0;
+                height: max-content;
+                position: relative;
+                display: block;
+                float: unset;
+            }
+            &:nth-child(2){
+                position: relative;
+                width: 100%;
+                float: unset;
+                background-color: #272727;
+                top: 0;
+                height: 100vh;
+                right: 0;
+                padding-top: 90px;
+                z-index: 300000000;
+                & > div > *{
+                    width: 100%;
+                    position: relative;
+                    margin: 0 auto;
+                    text-align: center;
+                    & > img{
+                        width: 80%;
+                        max-width: 140px;
+                        margin: 0 auto;
+                    }
+                    color: white;
+                    
+                }
+                & > div > img{
+                    width: 80%;
+                    max-width: 300px;
+                    display: block;
+                    margin: 0 auto;
+                }
+                & > div > .links{
+                    width: 80%;
+                    & > a{
+                        font-size: 1rem;
+                        font-family: 'Fjalla';
+                        & > p{
+                            font-family: "Fjalla";
+                            width: max-content;
+                            font-size: 1rem;
+                            display: block;
+                            margin: 2px auto;
+                            max-width: 80%;
+                            text-align: center;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    .kids-background{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        mix-blend-mode: lighten;
+    }
+    
+    .credits-and-thanks{
+        width: -webkit-max-content;
+        width: -moz-max-content;
+        width: 100%;
+        max-width: unset;
+        font-size: 1.8rem;
+        color: white;
+        font-family: "Fjalla";
+        margin-left: 0;
+        margin-top: 1rem !important;
+        padding: 10px;
+    }
+    
+    .race-section-1{
+        
+            position: relative;
+            & .logo{
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                max-width: 150px;
+                margin-bottom: 1rem;
+                top: unset;
+            }
+    }
+    .find-my-registration{
+        float: unset;
+        
+        width: max-content;
+        max-width: 300px;
+        margin-right: 2rem;
+        height: max-content;
+        padding: 3rem 0;
+        padding-top: 0;
+        margin-left: 2rem;
+        & > *{
+            float: unset;
+            display: block;
+            margin: 0;
+            text-align: right;
+    
+        }
+        & > label{
+            color: white;
+            font-family: 'Fjalla';
+            font-size: 1.4rem;
+        }
+        &>input{
+            margin: 0.8rem 0;
+            font-size: 1.2rem;
+            text-align: center;
+            font-family: 'Fjalla';
+            padding: 20px;
+            width: max-content;
+            &::placeholder{
+                width: max-content;
+                font-size: 1.2rem;
+                font-family: 'Fjalla';
+            }
+        }
+    }
+    .pink-button{
+        background-color: #FF0066;
+        width: -webkit-max-content;
+        width: -moz-max-content;
+        width: max-content;
+        padding: 1rem;
+        height: -webkit-max-content;
+        height: -moz-max-content;
+        height: max-content;
+        cursor: pointer;
+        color: white;
+        font-size: 2rem;
+        
+    z-index: 2000000000;
+        font-family: "Fjalla";
+        box-shadow: 0 0 10px -5px #520021;
+        position: relative;
+        &:hover{
+            text-decoration: underline;
+        box-shadow: 0 0 10px -3px #520021;
+        }
+    }
+    
+    .blue-button{
+        background-color: #005fcc;
+        width: -webkit-max-content;
+        width: -moz-max-content;
+        width: max-content;
+        padding: 1rem;
+        height: -webkit-max-content;
+        height: -moz-max-content;
+        height: max-content;
+        cursor: pointer;
+        color: white;
+        font-size: 2rem;
+        
+    z-index: 2000000000;
+        font-family: "Fjalla";
+        box-shadow: 0 0 10px -5px #050052;
+        position: relative;
+        &:hover{
+            text-decoration: underline;
+        box-shadow: 0 0 10px -3px #010052;
+        }
+    }
+    
+    .loading-modal{
+        position: fixed;
+        top: 90px;
+        width: 100vw;
+        background-color: white;
+        height: 100vh;
+        padding-top: 10rem;
+        z-index: 3000000000;
+        &>p{
+          margin-top: 200px;
+          font-size: 4rem;
+          width: max-content;
+          margin:1rem auto;
+          display: block;
+      
+        }
+        &>img{
+          width: 50vw;
+          min-width: 200px;
+          margin: 0 auto;
+          display: block;
+        }
+      }
+      
+      .name-header{
+        font-size: 2rem;
+        color: white;
+        font-family: "Fjalla";
+        margin-top: 2rem;
+        margin-left: 2rem;
+      }
+      .white-label{
+        float: unset;
+        display: block;
+        color: white;
+        font-family: 'Fjalla';
+        margin-left: 0;
+        padding: 10px;
+        max-width: 100vw;
+        &.big{
+            font-size: 2rem;
+        }
+        &.medium{
+            font-size: 1.4rem;
+            margin-bottom: 14px;
+        }
+      }
+      .race-information{
+        width: 80%;
+        padding: 40px;
+        z-index: 1000000000;
+        position: relative;
+          & > *{
+            & > *{
+                font-family: 'Fjalla';
+    
+            }
+            font-family: 'Fjalla';
+            
+          }
+          & label{
+            display: block;
+            width: 100%!important;
+            color: white;
+            font-size: 1.2rem;
+          }
+          & p{
+            display: inline-block;
+            width: 50%;
+          }
+      }
+      .time-container{
+          padding: 0 2rem;
+          margin-bottom: 2rem;
+          text-align: center;
+          & > *{
+              display: inline-block;
+              width: max-content!important;
+          }
+          & > input{
+              width: 40px!important;
+              padding: 10px;
+              color: black;
+              margin: 1rem;
+              font-family: 'Fjalla';
+              text-align: center;
+          }
+      }
+      .your-top-position{
+        width: -webkit-max-content;
+        width: -moz-max-content;
+        width: 90%;
+        padding: 1rem 0;
+        border-bottom: 3px solid white;
+        color: white;
+        text-align: center;
+        right: 0;
+        top: 0;
+        margin: 0 auto;
+        font-family: "Fjalla";
+        margin-bottom: 20px;
+      }
+      .button-container{
+        margin: 2rem auto;
+        display: block;
+        width: 100vw!important;
+        text-align: center;
+      }
+      
+  }
+  .button-distance{
+    display: inline;
+    font-size: 1.2rem;
+    padding: 1rem;
+    font-weight: 600;
+    margin: 0 0.2rem;
+    cursor: pointer;
+    letter-spacing: -1px;
+    color: white;
+    &:hover{
+        text-decoration: underline;
+    }
+    &.selected{
+        text-decoration: underline;
+        font-weight: 1000;
+        background-color: #ffffff;
+        color: #FF5B8F;
+    }
+}
+
+.podium-table{
+    & *, & * *{
+            font-family: 'Fjalla';
+        & > *{
+            font-family: 'Fjalla';
+        }
+    }
 }

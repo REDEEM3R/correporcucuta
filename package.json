@@ -22,6 +22,7 @@
     "@angular/common": "~8.2.0",
     "@angular/compiler": "~8.2.0",
     "@angular/core": "~8.2.0",
+    "@angular/fire": "^6.0.3",
     "@angular/forms": "~8.2.0",
     "@angular/platform-browser": "~8.2.0",
     "@angular/platform-browser-dynamic": "~8.2.0",
@@ -29,8 +30,10 @@
     "angular2-csv": "^0.2.9",
     "bulma": "^0.8.2",
     "firebase": "^7.17.1",
+    "html-to-image": "^0.1.1",
     "request": "^2.88.2",
     "rxjs": "~6.4.0",
+    "sweetalert2": "^10.6.1",
     "tslib": "^1.13.0",
     "zone.js": "~0.9.1"
   },

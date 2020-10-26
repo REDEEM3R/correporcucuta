@@ -1179,3 +1179,28 @@ img.benefit{
       }
     }
 }
+
+
+
+.banner-race-day-launch{
+    margin-top: 90px;
+    background-color: #FF0066;
+    padding: 2rem 1rem;
+    font-size: 1rem!important;
+    & img{
+        display: inline-block;
+        width: 100vw;
+        max-width: 140px;
+        &:nth-child(2){
+            float: right;
+            top:0;
+        }
+    }
+    & h1{
+        font-size: 1rem!important;
+        & a{
+            color: white;
+            font-family: 'Fjalla';
+        }
+    }
+}

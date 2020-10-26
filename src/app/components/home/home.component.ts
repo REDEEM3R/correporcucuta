@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { auth, firestore } from 'firebase/app';
 import { Router } from '@angular/router';
+import { AngularFirestore} from '@angular/fire/firestore';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(readonly navigator: Router) { }
+  constructor(readonly navigator: Router, readonly firestoreA: AngularFirestore) { }
   runners: any[];
   databaseResults: any;
   newSignup: any;
@@ -17,7 +18,7 @@ export class HomeComponent implements OnInit {
   pulledNavbar: false;
   @HostListener('window:scroll', ['$event'])
   onWindowScroll($event) {
-    console.log(window.pageYOffset);
+    // console.log(window.pageYOffset);
     this.topPosition = window.pageYOffset;
   }
 
@@ -84,58 +85,28 @@ export class HomeComponent implements OnInit {
 
   public getRunners(){
     let runners = [];
-    firestore().collection('virtualRegistrations').get({}).then(_ => {
+    this.firestoreA.collection('virtualRegistrations').ref.get({}).then(_ => {
       if(_.docs.length > 0){
         _.docs.map(doc => {
           this.databaseResults = _.docs.length;
-          let runner = doc.data({});
-
-          runner.city = runner.city !== null && runner.city !== undefined ? runner.city.toString().replace(/\s/g, "...."): null;
-          runner.city = runner.city !== null && runner.city !== undefined ? runner.city.toString().replace(/(\r\n|\n|\r)/gm, "...."): null;
-          runner.city = runner.city !== null && runner.city !== undefined ? runner.city.toString().replace(/,/g, '', "....") : null; 
-
-          runner.address = runner.address !== null ? runner.address.toString().replace(/\s/g, "...."): null;
-          runner.address = runner.address !== null ? runner.address.toString().replace(/(\r\n|\n|\r)/gm, "...."): null;
-
-          runner.address = runner.address !== null ? runner.address.toString().replace(/,/g, '', "...."): null;
-         
-          runner.actualDate = new Date(runner.registrationDate);
-          runner.actualDate = runner.actualDate.toString();
-
-          switch (runner.registrationType) {
-            case 1:
-              runner.registrationType = 'GRATIS';
-              runner.size = 'no aplica';
-              runner.shirtOption = 'no aplica';
-              break;
-              case 2:
-              runner.registrationType = 'MEDALLA';
-              runner.size = 'no aplica';
-              runner.shirtOption = 'no aplica';
-              break;
-              case 3:
-              runner.registrationType = 'CAMISA';
-              // tslint:disable-next-line:max-line-length
-              runner.shirtOption = runner.shirtOption === 0 ? 'CAMISA NEGRA' : runner.shirtOption === 1 ? 'CAMISA AZUL' : runner.shirtOption === 2 ? 'CAMISA ROSADA' : '';
-              break;
-              case 4:
-              runner.registrationType = 'CAMISA + MEDALLA';
-              // tslint:disable-next-line:max-line-length
-              runner.shirtOption = runner.shirtOption === 0 ? 'CAMISA NEGRA' : runner.shirtOption === 1 ? 'CAMISA AZUL' : runner.shirtOption === 2 ? 'CAMISA ROSADA' : '';
-              break;
-
-            default:
-              break;
+          let runner = doc.data();
+          if(!runner.distance){
+            // this.firestoreA.collection('virtualRegistrations').doc(doc.id).update({distance: 0});
+            // runner.id =  doc.id;
+            // console.log(runner);
+            runners.push(runner);
           }
-
-          runners.push(runner);
-          if(runners.length === _.docs.length){
+          // console.log(runner);
+          // if(runners.length === _.docs.length){
             this.runners = runners;
             // console.log(this.runners)
-            this.downloadFile(this.runners);
-          }
+            // this.downloadFile(this.runners);
+          // }
         })
       }
+      // if(runner.id === undefined){
+
+      // }
     });
   }
 

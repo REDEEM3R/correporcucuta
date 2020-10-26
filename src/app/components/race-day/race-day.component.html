@@ -1,34 +1,151 @@
- <img src="../../../assets/images/soñar_niños_y_niñas.png" class="kids-background">
+ <img src="../../../assets/images/sonar_fondo_caras.png" class="kids-background">
 <div class="main-race-background pink">
    
-    <div class="race-section-1" style="position:relative;" *ngIf="currentSection === 0">
+    <div class="race-section-1" style="position:relative;z-index: 40000000;" *ngIf="currentSection === 0">
+        <label class="white-label medium" style="margin-top: 4rem;display: block;">San José de Cúcuta / Octubre 15-18 2020</label><br>
         <p class="credits-and-thanks">GRACIAS A TODAS Y TODOS POR SU PARTICIPACION</p>
+        <div class="find-my-registration">
+            <label for="identification-number">Documento de identidad</label>
+            <input  type="number" [(ngModel)]="idtosearch"  name="identification-number" class="form-input" placeholder="Cédula, pasaporte, DNI">
+            <div (click)="startSearch(idtosearch)" class="button pink-button">Buscar</div>
+        </div>
         <img class="logo" src="../../../assets/images/new-logo-try.png">
+        <h2 (click)="startNewRegistration()" style="margin: 1rem;font-size: 1rem;color: white;position: absolute;top: 0; max-width: 500px;font-family: 'Fjalla';">¿No lograste hacer tu registro para Corre por Cúcuta? <span style="text-decoration: underline;cursor: pointer;">Haz click aquí</span></h2>
+        
+    
     </div>
-    <div *ngIf="currentSection === 1">
+    <div style="padding-top: 2rem;" *ngIf="currentSection === 1 && personalData">
+        <label class="white-label medium">San José de Cúcuta / Octubre 15-18 2020</label><br>
+        <label class="white-label big">Runner #{{personalData.identityDocument}}</label>
+        <label class="name-header" *ngIf="personalData !== undefined">{{personalData.name}}</label>
+        <div *ngIf="runnerData" class="race-information">
+            <label>TU DISTANCIA</label><p style="font-size: 2rem;color: white;" *ngIf="personalData.distance && personalData.distance !== undefined && personalData.distance !== null">{{personalData.distance}} KILÓMETROS</p>
+            
+            <div  *ngIf="!personalData.distance || personalData.distance === undefined || personalData.distance === null" style="color: white;font-size: 1.2rem;margin: 1rem auto;text-align: center;">
+                <p style="margin: 1rem 0 ; width: max-content;">Confirma tu distancia</p>
+                <div (click)="updateSelectedDistanceBackupVirtual(5)" class="button-distance small" [ngClass]="{'selected': pendingRegistration && pendingRegistration.distance === 5}">5K</div>
+                <div (click)="updateSelectedDistanceBackupVirtual(10)"  class="button-distance small" [ngClass]="{'selected': pendingRegistration && pendingRegistration.distance === 10}">10K</div>
+                <div (click)="updateSelectedDistanceBackupVirtual(21)"  class="button-distance small" [ngClass]="{'selected': pendingRegistration && pendingRegistration.distance === 21}">21K</div>
+            </div>  
+            <label style="vertical-align: top;">TU RECORRIDO <span style="font-size: 0.8rem;">Opcional</span></label><textarea style="padding: 10px;width: 100%;margin-bottom: 2rem;" [(ngModel)]="runnerData.routeFollowed"></textarea>
+            <label>TU TIEMPO</label>
+            <div class="time-container" *ngIf="runnerData.time">
+                <label>Horas*</label>
+                <input type="number" name="hours" [(ngModel)]="runnerData.time.hours">
+                <label>Minutos*</label>
+                <input type="number" name="minutes"  [(ngModel)]="runnerData.time.minutes">
+                <label>Segundos*</label>
+                <input type="number" name="seconds"  [(ngModel)]="runnerData.time.seconds">
+            </div>
+            <label>Sube una captura de Strava, NRC, Runtastic o tu app preferida*</label>
+            <input type="file"  (change)="preloadPicture($event.target.files)">
 
+            <p style="color: white;font-family: 'Fjalla';font-size: 0.8rem;width: 100%;">*Los campos marcados con un asterisco son obligatorios</p>
+        </div>
+        <div class="button pink-button" (click)="saveRunnerData(runnerData)" style="margin: 0 auto;">ENVIAR DATOS</div>
+        <div class="button blue-button" (click)="resetForm()" style="margin: 1rem auto;font-size: 1rem;">BUSCAR OTRO RUNNER</div>
     </div>
-    <div *ngIf="currentSection === 2">
-
+    <div style="padding-top: 2rem;" *ngIf="currentSection === 2 && personalData">
+        <label class="white-label medium">San José de Cúcuta / Octubre 15-18 2020</label>
+        <br>
+        <label class="white-label big">Runner #{{personalData.identityDocument}}</label>
+        <label class="name-header" *ngIf="personalData !== undefined">{{personalData.name}}</label>
+        <div *ngIf="runnerData" class="race-information" style="z-index: 1000000000;">
+            <label>TU DISTANCIA</label><p style="font-size: 2rem;color: white;">{{personalData.distance}} KILOMETROS</p>
+            <label style="vertical-align: top;">TU RECORRIDO <span style="font-size: 0.8rem;">Opcional</span></label>
+            <label style="color: #2c2c2c;background-color: white;padding: 10px;width: max-content;">{{runnerData.routeFollowed !== null && runnerData.routeFollowed !== undefined ? runnerData.routeFollowed : 'No cargaste ninguna ruta'}}</label>
+            <label style="margin-top: 2rem;">TU TIEMPO</label>
+            <label class="time-chart" style="display: inline-block;width: max-content;border: 1px solid white;margin: 5px;padding: 5px;">{{runnerData.time.hours}} HORAS</label>
+            <label class="time-chart" style="display: inline-block;width: max-content;border: 1px solid white;margin: 5px;padding: 5px;">{{runnerData.time.minutes}} MINUTOS</label>
+            <label class="time-chart" style="display: inline-block;width: max-content;border: 1px solid white;margin: 5px;padding: 5px;">{{runnerData.time.seconds}} SEGUNDOS</label>
+            <label style="margin-top: 3rem;">ESTA FUE LA CAPTURA QUE SUBISTE DE TU CARRERA</label>
+            <img src="{{evidencePictureUrl}}" style="width: 80vw;max-width: 400px;margin-bottom: 1rem;margin-top: 1rem;display: block;" alt="{{personalData.name}}">
+        </div>
+        <div class="button-container" style="margin: 2rem auto;display: block;width: max-content;">
+            <div class="your-top-position"><p style="font-family: 'Fjalla';font-size: 2rem;">Terminaste {{runnerData.positionCalculated}}</p>Total en tu categoría. {{runnerData.distance}} KILOMETROS. {{totalRunners}} Corredores</div>
+            <table class="podium-table" *ngIf="podiumRunners" style="z-index: 99999999;position: relative;display: block;">
+                <thead >
+                    <tr>
+                        <td>Nombre</td>
+                        <td>Posición</td>
+                        <td>Tiempo</td>
+                    </tr>
+                    <tr style="background-color: white;">
+                        <td>{{personalData.name}}</td>
+                        <td>{{runnerData.position + 1}}</td>
+                        <td>{{runnerData.time.hours}}H: {{runnerData.time.minutes}}M: {{runnerData.time.seconds}}S</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border: 1px solid white;" *ngFor="let runner of podiumRunners ">
+                        <td style="width: 20%!important;">{{runner.name}}</td>
+                        <td>{{runner.position + 1}}</td>
+                        <td>{{runner.time.hours}}H: {{runner.time.minutes}}M: {{runner.time.seconds}}S</td>
+                    </tr>
+                </tbody>
+            </table>
+           
+            <div class="button pink-button" (click)="downloadCertificate()" style="margin: 20px auto;
+            display: block;">DESCARGAR CERTIFICADO</div>
+    
+        </div>
+        <div class="button blue-button" (click)="resetForm()" style="margin: 1rem auto;font-size: 1rem;">BUSCAR OTRO RUNNER</div>
     </div>
+    <div style="padding-top: 2rem;" *ngIf="currentSection === 3">
+        <label class="white-label medium">San José de Cúcuta / Octubre 15-18 2020</label>
+        <br>
+        <label class="white-label big">Haz tu registro ahora mismo.</label>
+        <div *ngIf="pendingRegistration" class="race-information" style="z-index: 1000000000;padding-top: 0;">
+            <div style="color: white;font-size: 1.2rem;margin: 1rem auto;text-align: center;">
+                <p style="margin: 1rem 0 ; width: max-content;">Selecciona tu distancia</p>
+                <div (click)="updateSelectedDistanceBackup(5)" class="button-distance small" [ngClass]="{'selected': pendingRegistration && pendingRegistration.distance === 5}">5K</div>
+                <div (click)="updateSelectedDistanceBackup(10)"  class="button-distance small" [ngClass]="{'selected': pendingRegistration && pendingRegistration.distance === 10}">10K</div>
+                <div (click)="updateSelectedDistanceBackup(21)"  class="button-distance small" [ngClass]="{'selected': pendingRegistration && pendingRegistration.distance === 21}">21K</div>
+            </div>    
+            <div>
+                <label style=" width: max-content;">Documento de Identidad (Cedula, pasaporte, DNI)</label>
+                <input style="padding: 10px 0;margin: 10px 0;width: 100%;font-size: 1.2rem;text-align: center;" [(ngModel)]="pendingRegistration.identityDocument" type="number">
+            </div>
 
+            <div>
+                <label style=" width: max-content;">Nombre completo</label>
+                <input style="padding: 10px 0;margin: 10px 0;width: 100%;font-size: 1.2rem;text-align: center;" [(ngModel)]="pendingRegistration.name">
+            </div>
+            <div>
+                <label style=" width: max-content;">Número de Teléfono</label>
+                <input style="padding: 10px 0;margin: 10px 0;width: 100%;font-size: 1.2rem;text-align: center;" type="number" [(ngModel)]="pendingRegistration.phoneNumber">
+            </div>
+            <div>
+                <label style=" width: max-content;">Dirección</label>
+                <input style="padding: 10px 0;margin: 10px 0;width: 100%;font-size: 1.2rem;text-align: center;" [(ngModel)]="pendingRegistration.address">
+            </div>
+            <div>
+                <label style=" width: max-content;">Correo Electrónico</label>
+                <input style="padding: 10px 0;margin: 10px 0;width: 100%;font-size: 1.2rem;text-align: center;" [(ngModel)]="pendingRegistration.email">
+            </div>
+        </div>
+        <div class="button-container" style="margin: 2rem auto;display: block;width: max-content;">
+            <div class="button pink-button" (click)="saveNewRegistrationAndSearch()" style="margin: 10px 5px;display: inline-block;">GUARDAR Y CONTINUAR</div>    
+            <div class="button blue-button" (click)="resetForm()" style="margin: 1rem auto;font-size: 1rem;">CANCELAR</div>
+        </div>
+     </div>
     <div class="static-sidebar">
         <div style="position: relative;width: 100%;height: max-content;">
             <img class="virtual-logo body" src="../../../assets/images/logo-virtual.png">
 
             <div style="margin-top: 2rem;">
                 <img src="../../../assets/images/fundacion-cancer-de-ninos.png">
-                <p>FUNDACIÓN NIÑOS Y NIÑAS CON CÁNCER</p>
+                <p style="font-family: 'Fjalla';">FUNDACIÓN NIÑOS Y NIÑAS CON CÁNCER</p>
             </div>
     
             <div style="width: 100%;margin-top: 2rem;">
-                <a href="/patrocinadores" style="color: white;"><p style="font-family: 'Fjalla';width: 80%;font-size: 1.2rem;display: block;margin: 0 auto;">HAZ CLICK AQUÍ PARA CONOCER A TODOS NUESTROS PATROCINADORES Y ALIADOS</p></a>
+                <a href="/patrocinadores" style="color: white;"><p style="font-family: 'Fjalla';width: 80%;font-size: 1rem;display: block;margin: 0 auto;">HAZ CLICK AQUÍ PARA CONOCER A TODOS NUESTROS PATROCINADORES Y ALIADOS</p></a>
             </div>
     
-            <div style="position: relative;bottom: 0;margin-top: 5rem;">
-                <a href="https://www.correporcucuta.com/" target="_blank" style="color: white;"><p style="font-family: 'Fjalla';width: 80%;font-size: 1.4rem;display: block;margin: 1rem auto;">WWW.CORREPORCUCUTA.COM</p></a>
-                <a href="https://www.instagram.com/correporcucuta" target="_blank"  style="color: white;"><p style="font-family: 'Fjalla';width: 80%;font-size: 1.4rem;display: block;margin: 1rem auto;">@CORREPORCUCUTA</p></a>
-                <a href="mailto:correporcucuta@gmail.com" target="_blank"  style="color: white;"><p style="font-family: 'Fjalla';width: 80%;font-size: 1.4rem;display: block;margin: 1rem auto;">CORREPORCUCUTA@GMAIL.COM</p></a>
+            <div class="links" style="position: relative;bottom: 0;margin-top: 5rem;">
+                <a href="https://www.correporcucuta.com/" target="_blank" style="color: white;"><p>WWW.CORREPORCUCUTA.COM</p></a>
+                <a href="https://www.instagram.com/correporcucuta" target="_blank"  style="color: white;"><p>@CORREPORCUCUTA</p></a>
+                <a href="mailto:correporcucuta@gmail.com" target="_blank"  style="color: white;"><p>CORREPORCUCUTA@GMAIL.COM</p></a>
             </div>
         </div>
 
@@ -36,3 +153,28 @@
 
 
 </div>
+
+
+<div *ngIf="downloadingCertificate === true && personalData && runnerData" style="width: 100vw;height: 100vh;background-color: black;position: fixed;top: 0;left: 0;z-index: 9999999999;">
+    <div id="certificate4download" style="position: relative; width: max-content;height: max-content;margin: 0;top: 0;left: 0;">
+        <img style="position: relative;display: block;width: 1200px!important;height: auto;" src="../../../assets/images/corre-por-cucuta-certificado.png">
+        <div style="position: absolute;top: 210px;">
+            <p style="color: white;font-family: 'Fjalla';font-size:1.6rem;margin-left: 8rem;text-transform: uppercase;">{{personalData.name}}</p>
+            <p style="color: white;font-family: 'Fjalla';font-size:1.6rem;margin-left: 20rem;margin-top: 2rem;">{{personalData.distance}} KILÓMETROS</p>
+            <p style="color: white;font-family: 'Fjalla';font-size:1.6rem;margin-left: 20rem;margin-top: 2.4rem;">{{runnerData.time.hours}}H :{{runnerData.time.minutes}}M :{{runnerData.time.seconds}}S</p>
+            
+        </div>
+        
+      </div>  
+  </div>
+
+
+<div class="loading-modal" style="z-index: 99999999999999999999;" *ngIf="loading === true">
+    <p style="font-family: 'Fjalla';">
+      CARGANDO
+    </p>
+    <img src="../../../assets/images/new-logo-try.png">
+  
+  </div>
+
+  

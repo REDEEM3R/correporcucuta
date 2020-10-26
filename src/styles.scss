@@ -1036,12 +1036,6 @@ body{
         }
     }
 }
-div{
-    & > input{
-      width: 10%;
-      margin: 30px;
-    }
-}
 
 .race-title-map{
   display: block;
@@ -2536,3 +2530,12 @@ html{
         font-family: 'helvetica', sans-serif;
     }
 }
+
+
+
+.swal2-container{
+    font-family: 'Fjalla'!important;
+    z-index: 20000000000!important;
+    
+}
+    

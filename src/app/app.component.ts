@@ -35,7 +35,7 @@ export class AppComponent {
       appId: "1:648158870293:web:cd5390c83554d3c504071c",
       measurementId: "G-SB463QMBV5"
     };
-    initializeApp(firebaseConfig);
+    // initializeApp(firebaseConfig);
     // console.log(this._route.url);
     this._route.events.subscribe((event) => {
       // console.log(event);
